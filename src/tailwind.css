@@ -1,3 +1,39 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.react-autosuggest__container {
+  @apply relative;
+}
+
+.react-autosuggest__suggestions-container--open {
+  @apply block absolute w-full border-2 border-apricot rounded-lg z-10 bg-sand text-apricot overflow-hidden;
+  top: 50px;
+}
+
+@screen xl {
+  .react-autosuggest__suggestions-container--open {
+    @apply w-80;
+  }
+}
+
+@screen md {
+  .react-autosuggest__suggestions-container--open {
+    @apply w-1/2;
+  }
+}
+
+.react-autosuggest__suggestions-list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.react-autosuggest__suggestion {
+  cursor: pointer;
+  padding: 10px 20px;
+}
+
+.react-autosuggest__suggestion--highlighted {
+  @apply bg-apricot bg-opacity-25 text-gray-800;
+}

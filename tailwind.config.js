@@ -7,8 +7,12 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        apricot: '#F2916B'
-      }
+        apricot: '#F2916B',
+        sand: '#F3F5F6',
+      },
+      spacing: {
+        '80': '20rem',
+      },
     },
     screens: {
       sm: '640px',
@@ -595,7 +599,8 @@ module.exports = {
     transitionProperty: {
       none: 'none',
       all: 'all',
-      default: 'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform',
+      default:
+        'background-color, border-color, color, fill, stroke, opacity, box-shadow, transform',
       colors: 'background-color, border-color, color, fill, stroke',
       opacity: 'opacity',
       shadow: 'box-shadow',
