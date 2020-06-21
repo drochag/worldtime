@@ -30,7 +30,7 @@ export interface Suggestion {
 
 const inputClassNames = `
   bg-sand appearance-none border-2 border-sand rounded
-  w-full xl:w-80 md:w-1/2
+  w-full
   py-2 px-4
   rounded-full
   text-gray-700 leading-tight
@@ -87,9 +87,9 @@ const Search: React.FC<SearchProps> = ({ onSelect }) => {
         inputProps={inputProps}
       />
       {loading && (
-        <>
+        <div className="inline-block mt-2 md:ml-3 md:mt-0">
           <FontAwesomeIcon icon={faSpinner} className="fa-spin mr-3" /> Loading ...
-        </>
+        </div>
       )}
     </>
   )

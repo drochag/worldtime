@@ -3,22 +3,20 @@
 @tailwind utilities;
 
 .react-autosuggest__container {
-  @apply relative;
+  @apply relative w-full inline-block;
 }
 
-.react-autosuggest__suggestions-container--open {
-  @apply block absolute w-full border-2 border-apricot rounded-lg z-10 bg-sand text-apricot overflow-hidden;
+.react-autosuggest__suggestions-container {
+  @apply hidden absolute border-2 border-apricot rounded-lg z-10 bg-sand text-apricot overflow-hidden;
   top: 50px;
 }
 
-@screen xl {
-  .react-autosuggest__suggestions-container--open {
-    @apply w-80;
-  }
+.react-autosuggest__suggestions-container--open {
+  @apply block;
 }
 
 @screen md {
-  .react-autosuggest__suggestions-container--open {
+  .react-autosuggest__container {
     @apply w-1/2;
   }
 }
