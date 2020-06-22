@@ -1,32 +1,11 @@
-import React, { ChangeEvent, useState } from 'react'
+import React, { ChangeEvent, useState, useCallback } from 'react'
 import debounce from 'lodash/debounce'
 import Autosuggest from 'react-autosuggest'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 import { getPlaces } from '../api'
-import { AxiosResponse } from 'axios'
-
-interface SearchProps {
-  onSelect: (suggestion: Suggestion) => void
-}
-
-interface Location {
-  lat: number
-  lng: number
-}
-
-export interface Suggestion {
-  formatted_address: string
-  name: string
-  geometry: {
-    location: Location
-    viewport: {
-      northeast: Location
-      southwest: Location
-    }
-  }
-}
+import { SearchProps, Suggestion } from 'types'
 
 const inputClassNames = `
   bg-sand appearance-none border-2 border-sand rounded
@@ -38,29 +17,31 @@ const inputClassNames = `
 `
 
 const renderSuggestion = suggestion => <div>{suggestion.formatted_address}</div>
+const getSuggestionValue = (s: string) => s
 
-const Search: React.FC<SearchProps> = ({ onSelect }) => {
-  const [suggestions, setSuggestions] = useState<AxiosResponse<any> | []>([])
+const Search: React.FC<SearchProps> = ({ onSelect, loading: loadingParent }) => {
+  const [suggestions, setSuggestions] = useState<Suggestion[]>([])
   const [value, setValue] = useState('')
   const [loading, setLoading] = useState(false)
 
+  const getSuggestions = useCallback(
+    debounce((search: string) => {
+      if (search.length < 3) {
+        return
+      }
+
+      setLoading(true)
+      getPlaces(search).then(data => {
+        console.log(data)
+        setSuggestions(data)
+        setLoading(false)
+      })
+    }, 750),
+    []
+  )
+
   const onInputChange = (event: ChangeEvent<HTMLInputElement>, { newValue }) => setValue(newValue)
-
-  const getSuggestions = debounce((search: string) => {
-    if (search.length < 3) {
-      return
-    }
-
-    setLoading(true)
-    getPlaces(search).then(data => {
-      setSuggestions(data)
-      setLoading(false)
-    })
-  }, 1000)
-
   const onSuggestionsFetchRequested = ({ value: search }) => getSuggestions(search)
-
-  const getSuggestionValue = (s: string) => s
   const onSuggestionsClearRequested = () => setSuggestions([])
   const onSuggestionSelected = (event: ChangeEvent<HTMLInputElement>, { suggestion }) => {
     onSelect(suggestion)
@@ -68,7 +49,7 @@ const Search: React.FC<SearchProps> = ({ onSelect }) => {
   }
 
   const inputProps = {
-    placeholder: 'Find place or timezone',
+    placeholder: 'Find place by typing',
     value,
     className: inputClassNames,
     onChange: onInputChange,
@@ -86,8 +67,8 @@ const Search: React.FC<SearchProps> = ({ onSelect }) => {
         value={value}
         inputProps={inputProps}
       />
-      {loading && (
-        <div className="inline-block mt-2 md:ml-3 md:mt-0">
+      {(loading || loadingParent) && (
+        <div className="inline-block mt-2 md:ml-3 md:mt-0 text-gray-600">
           <FontAwesomeIcon icon={faSpinner} className="fa-spin mr-3" /> Loading ...
         </div>
       )}

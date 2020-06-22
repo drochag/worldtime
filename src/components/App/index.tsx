@@ -1,22 +1,20 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
-import Search, { Suggestion } from 'components/Search'
+import Search from 'components/Search'
+import Suggestions from 'components/Suggestions'
 
 const App: React.FC = () => {
-  const [selectedSiggestons, setSelectedSiggestons] = useState<Suggestion[]>([])
-  const selectSuggestion = (suggestion: Suggestion) => {
-    setSelectedSiggestons([...selectedSiggestons, suggestion])
-  }
-
+  const [time, setTime] = useState(new Date())
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTime(new Date())
+    }, 1000 * 60)
+    return () => clearInterval(interval)
+  }, [])
   return (
-    <div className="max-w-4xl mx-auto flex flex-col">
+    <div className="max-w-6xl mx-auto flex flex-col">
       <h1 className="text-6xl text-white leading-tight mt-12 text-center">WorldtimeLite</h1>
-      <div className="w-full p-3 bg-white mt-10 rounded-lg shadow-xl">
-        <Search onSelect={selectSuggestion} />
-        {selectedSiggestons.map(suggestion => (
-          <p key={suggestion.formatted_address}>{suggestion.name}</p>
-        ))}
-      </div>
+      <Suggestions time={time}>{props => <Search {...props} />}</Suggestions>
     </div>
   )
 }
