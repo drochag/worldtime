@@ -12,8 +12,10 @@ const App: React.FC = () => {
     return () => clearInterval(interval)
   }, [])
   return (
-    <div className="max-w-6xl mx-auto flex flex-col">
-      <h1 className="text-6xl text-white leading-tight mt-12 text-center">WorldtimeLite</h1>
+    <div className="max-w-7xl mx-auto flex flex-col">
+      <h1 className="text-4xl md:text-6xl text-white leading-tight mt-12 text-center">
+        WorldtimeLite
+      </h1>
       <Suggestions time={time}>{props => <Search {...props} />}</Suggestions>
     </div>
   )

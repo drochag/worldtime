@@ -43,21 +43,26 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
 
   return (
     <div className={rowClassNames} key={suggestion.formatted_address}>
-      <div className="md:w-10 w-6 text-sm md:text-lg">
-        <FontAwesomeIcon icon={faTrash} className="mr-3" onClick={onClick} />
-      </div>
-      <div className={circleClassNames}>
-        {idx === 0 && <FontAwesomeIcon icon={faHome} onClick={onClick} />}
-        {idx !== 0 && (
-          <>
-            {difference > 0 && '+'}
-            {difference}
-          </>
-        )}
+      <div className="flex items-center text-center md:text-left align-center flex-col md:flex-row">
+        <div className="md:w-10 w-6 text-sm md:text-lg">
+          <FontAwesomeIcon icon={faTrash} className="md:mr-3 mb-2 md:mb-0" onClick={onClick} />
+        </div>
+        <div className={circleClassNames}>
+          {idx === 0 && <FontAwesomeIcon icon={faHome} onClick={onClick} />}
+          {idx !== 0 && (
+            <>
+              {difference > 0 && '+'}
+              {difference}
+            </>
+          )}
+        </div>
       </div>
       <City
         difference={difference}
-        country="MX"
+        country={
+          suggestion.address_components.find(component => component.types[0] === 'country')
+            ?.short_name || ''
+        }
         time={time}
         name={getName(suggestion.address_components, suggestion.types)}
         abbreviation={

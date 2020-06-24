@@ -34,7 +34,7 @@ class Suggestions extends React.Component<SuggestionsProps> {
           onSelect: this.selectSuggestion,
           loading: this.state.loading,
         })}
-        <div className="overflow-x-auto flex relative">
+        <div className="overflow-x-auto flex relative xxl:justify-center">
           <SuggestionsList
             time={this.props.time}
             selectedSuggestions={this.state.selectedSuggestions}

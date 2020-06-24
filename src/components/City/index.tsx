@@ -5,13 +5,13 @@ const City: React.FC<CityProps> = ({ name, time, country, difference, abbreviati
   const date = new Date(time)
   date.setHours(date.getHours() + difference)
   return (
-    <div className="ml-2 w-48 md:w-80 text-sm md:text-base flex justify-between">
-      <div className="flex flex-col">
+    <div className="ml-2 w-32 md:w-80 text-xs md:text-base flex justify-between flex-col md:flex-row">
+      <div className="flex flex-row md:flex-col justify-between md:justify-center">
         <span className="font-medium">{name}</span>
-        <span className="font-thin text-sm">{country}</span>
+        <span className="font-thin w-6 text-xs md:text-sm text-right md:text-left">{country}</span>
       </div>
-      <div className="flex flex-col text-right">
-        <span className="font-medium">
+      <div className="flex flex-row md:flex-col justify-between md:justify-center md:text-right justify-center">
+        <span className="font-medium mr-2 md:mr-0">
           {new Intl.DateTimeFormat('en-US', {
             hour: 'numeric',
             minute: 'numeric',
@@ -20,7 +20,7 @@ const City: React.FC<CityProps> = ({ name, time, country, difference, abbreviati
             .toLowerCase()}{' '}
           {abbreviation}
         </span>
-        <span className="font-thin text-sm">
+        <span className="font-thin text-xs md:text-sm text-right">
           {new Intl.DateTimeFormat('en-US', {
             weekday: 'short',
           }).format(date)}

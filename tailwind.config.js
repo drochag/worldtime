@@ -17,6 +17,15 @@ module.exports = {
       fontSize: {
         xxs: '0.5rem',
       },
+      maxWidth: {
+        '7xl': '80rem',
+      },
+      inset: {
+        '-1': '-1px',
+      },
+      screens: {
+        xxl: '1300px',
+      },
     },
     screens: {
       sm: '640px',
