@@ -30,6 +30,7 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
     const selectedSuggestions = [...this.state.selectedSuggestions]
     selectedSuggestions.splice(idx, 1)
     this.setState({ selectedSuggestions })
+    ls('suggestions', selectedSuggestions)
   }
 
   onSuggestionsShown = (isEmpty: boolean) => {
