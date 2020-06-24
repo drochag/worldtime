@@ -8,7 +8,7 @@
 }
 
 .react-autosuggest__suggestions-container {
-  @apply hidden absolute border-2 border-apricot rounded-lg z-10 bg-sand text-apricot overflow-hidden;
+  @apply hidden absolute border-2 border-apricot rounded-lg z-20 bg-sand text-apricot overflow-hidden;
   top: 50px;
 }
 

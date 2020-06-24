@@ -1,117 +1,120 @@
 [
   {
     "address_components": [
+      { "long_name": "New York", "short_name": "New York", "types": ["locality", "political"] },
       {
-        "long_name": "Monterrey",
-        "short_name": "Monterrey",
-        "types": ["locality", "political"]
-      },
-      {
-        "long_name": "Nuevo Leon",
-        "short_name": "N.L.",
+        "long_name": "New York",
+        "short_name": "NY",
         "types": ["administrative_area_level_1", "political"]
       },
-      {
-        "long_name": "Mexico",
-        "short_name": "MX",
-        "types": ["country", "political"]
-      }
+      { "long_name": "United States", "short_name": "US", "types": ["country", "political"] }
     ],
-    "formatted_address": "Monterrey, Nuevo Leon, Mexico",
+    "formatted_address": "New York, NY, USA",
     "geometry": {
       "bounds": {
-        "northeast": {
-          "lat": 25.7974005,
-          "lng": -100.1841891
-        },
-        "southwest": {
-          "lat": 25.5001894,
-          "lng": -100.4220032
-        }
+        "northeast": { "lat": 40.9175771, "lng": -73.70027209999999 },
+        "southwest": { "lat": 40.4773991, "lng": -74.25908989999999 }
       },
-      "location": {
-        "lat": 25.6866142,
-        "lng": -100.3161126
-      },
+      "location": { "lat": 40.7127753, "lng": -74.0059728 },
       "location_type": "APPROXIMATE",
       "viewport": {
-        "northeast": {
-          "lat": 25.7974005,
-          "lng": -100.1841891
-        },
-        "southwest": {
-          "lat": 25.5001894,
-          "lng": -100.4220032
-        }
+        "northeast": { "lat": 40.9175771, "lng": -73.70027209999999 },
+        "southwest": { "lat": 40.4773991, "lng": -74.25908989999999 }
       }
     },
-    "place_id": "ChIJ9fg3tDGVYoYRlJjIasrT06M",
+    "place_id": "ChIJOwg_06VPwokRYv534QaPC8g",
     "types": ["locality", "political"],
     "timezone": {
       "dstOffset": 3600,
-      "rawOffset": -21600,
+      "rawOffset": -18000,
       "status": "OK",
-      "timeZoneId": "America/Monterrey",
-      "timeZoneName": "Central Daylight Time"
+      "timeZoneId": "America/New_York",
+      "timeZoneName": "Eastern Daylight Time"
     },
-    "abbreviation": "CDT"
+    "abbreviation": "EDT"
   },
   {
     "address_components": [
       {
-        "long_name": "Cancún",
-        "short_name": "Cancún",
+        "long_name": "Los Angeles",
+        "short_name": "Los Angeles",
         "types": ["locality", "political"]
       },
       {
-        "long_name": "Quintana Roo",
-        "short_name": "Q.R.",
-        "types": ["administrative_area_level_1", "political"]
+        "long_name": "Los Angeles County",
+        "short_name": "Los Angeles County",
+        "types": ["administrative_area_level_2", "political"]
       },
       {
-        "long_name": "Mexico",
-        "short_name": "MX",
-        "types": ["country", "political"]
-      }
+        "long_name": "California",
+        "short_name": "CA",
+        "types": ["administrative_area_level_1", "political"]
+      },
+      { "long_name": "United States", "short_name": "US", "types": ["country", "political"] }
     ],
-    "formatted_address": "Cancún, Quintana Roo, Mexico",
+    "formatted_address": "Los Angeles, CA, USA",
     "geometry": {
       "bounds": {
-        "northeast": {
-          "lat": 21.2129226,
-          "lng": -86.74054009999999
-        },
-        "southwest": {
-          "lat": 21.0297632,
-          "lng": -86.95792659999999
-        }
+        "northeast": { "lat": 34.3373061, "lng": -118.1552891 },
+        "southwest": { "lat": 33.7036519, "lng": -118.6681759 }
       },
-      "location": {
-        "lat": 21.161908,
-        "lng": -86.85152789999999
-      },
+      "location": { "lat": 34.0522342, "lng": -118.2436849 },
       "location_type": "APPROXIMATE",
       "viewport": {
-        "northeast": {
-          "lat": 21.2129226,
-          "lng": -86.74054009999999
-        },
-        "southwest": {
-          "lat": 21.0297632,
-          "lng": -86.95792659999999
-        }
+        "northeast": { "lat": 34.3373061, "lng": -118.1552891 },
+        "southwest": { "lat": 33.7036519, "lng": -118.6681759 }
       }
     },
-    "place_id": "ChIJ21P2rgUrTI8Ris1fYjy3Ms4",
+    "place_id": "ChIJE9on3F3HwoAR9AhGJW_fL-I",
     "types": ["locality", "political"],
     "timezone": {
-      "dstOffset": 0,
-      "rawOffset": -18000,
+      "dstOffset": 3600,
+      "rawOffset": -28800,
       "status": "OK",
-      "timeZoneId": "America/Cancun",
-      "timeZoneName": "Eastern Standard Time"
+      "timeZoneId": "America/Los_Angeles",
+      "timeZoneName": "Pacific Daylight Time"
     },
-    "abbreviation": "EST"
+    "abbreviation": "PDT"
+  },
+  {
+    "address_components": [
+      { "long_name": "London", "short_name": "London", "types": ["locality", "political"] },
+      { "long_name": "London", "short_name": "London", "types": ["postal_town"] },
+      {
+        "long_name": "Greater London",
+        "short_name": "Greater London",
+        "types": ["administrative_area_level_2", "political"]
+      },
+      {
+        "long_name": "England",
+        "short_name": "England",
+        "types": ["administrative_area_level_1", "political"]
+      },
+      { "long_name": "United Kingdom", "short_name": "GB", "types": ["country", "political"] }
+    ],
+    "formatted_address": "London, UK",
+    "geometry": {
+      "bounds": {
+        "northeast": { "lat": 51.6723432, "lng": 0.148271 },
+        "southwest": { "lat": 51.38494009999999, "lng": -0.3514683 }
+      },
+      "location": { "lat": 51.5073509, "lng": -0.1277583 },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "northeast": { "lat": 51.6723432, "lng": 0.148271 },
+        "southwest": { "lat": 51.38494009999999, "lng": -0.3514683 }
+      }
+    },
+    "place_id": "ChIJdd4hrwug2EcRmSrV3Vo6llI",
+    "types": ["locality", "political"],
+    "timezone": {
+      "dstOffset": 3600,
+      "rawOffset": 0,
+      "status": "OK",
+      "timeZoneId": "Europe/London",
+      "timeZoneName": "British Summer Time"
+    },
+    "abbreviation": "BST"
   },
   {
     "address_components": [
@@ -125,38 +128,19 @@
         "short_name": "NSW",
         "types": ["administrative_area_level_1", "political"]
       },
-      {
-        "long_name": "Australia",
-        "short_name": "AU",
-        "types": ["country", "political"]
-      }
+      { "long_name": "Australia", "short_name": "AU", "types": ["country", "political"] }
     ],
     "formatted_address": "Sydney NSW, Australia",
     "geometry": {
       "bounds": {
-        "northeast": {
-          "lat": -33.5781409,
-          "lng": 151.3430209
-        },
-        "southwest": {
-          "lat": -34.118347,
-          "lng": 150.5209286
-        }
+        "northeast": { "lat": -33.5781409, "lng": 151.3430209 },
+        "southwest": { "lat": -34.118347, "lng": 150.5209286 }
       },
-      "location": {
-        "lat": -33.8688197,
-        "lng": 151.2092955
-      },
+      "location": { "lat": -33.8688197, "lng": 151.2092955 },
       "location_type": "APPROXIMATE",
       "viewport": {
-        "northeast": {
-          "lat": -33.5781409,
-          "lng": 151.3430209
-        },
-        "southwest": {
-          "lat": -34.118347,
-          "lng": 150.5209286
-        }
+        "northeast": { "lat": -33.5781409, "lng": 151.3430209 },
+        "southwest": { "lat": -34.118347, "lng": 150.5209286 }
       }
     },
     "place_id": "ChIJP3Sa8ziYEmsRUKgyFmh9AQM",
@@ -182,38 +166,19 @@
         "short_name": "CA",
         "types": ["administrative_area_level_1", "political"]
       },
-      {
-        "long_name": "United States",
-        "short_name": "US",
-        "types": ["country", "political"]
-      }
+      { "long_name": "United States", "short_name": "US", "types": ["country", "political"] }
     ],
     "formatted_address": "San Francisco Bay Area, CA, USA",
     "geometry": {
       "bounds": {
-        "northeast": {
-          "lat": 38.8642448,
-          "lng": -121.208178
-        },
-        "southwest": {
-          "lat": 36.8941549,
-          "lng": -123.632497
-        }
+        "northeast": { "lat": 38.8642448, "lng": -121.208178 },
+        "southwest": { "lat": 36.8941549, "lng": -123.632497 }
       },
-      "location": {
-        "lat": 37.8271784,
-        "lng": -122.2913078
-      },
+      "location": { "lat": 37.8271784, "lng": -122.2913078 },
       "location_type": "APPROXIMATE",
       "viewport": {
-        "northeast": {
-          "lat": 38.8642448,
-          "lng": -121.208178
-        },
-        "southwest": {
-          "lat": 36.8941549,
-          "lng": -123.632497
-        }
+        "northeast": { "lat": 38.8642448, "lng": -121.208178 },
+        "southwest": { "lat": 36.8941549, "lng": -123.632497 }
       }
     },
     "place_id": "ChIJtdeIpqODhYARqR9GV4QbiYw",
@@ -226,62 +191,5 @@
       "timeZoneName": "Pacific Daylight Time"
     },
     "abbreviation": "PDT"
-  },
-  {
-    "address_components": [
-      {
-        "long_name": "Buenos Aires",
-        "short_name": "CABA",
-        "types": ["locality", "political"]
-      },
-      {
-        "long_name": "Buenos Aires",
-        "short_name": "CABA",
-        "types": ["administrative_area_level_1", "political"]
-      },
-      {
-        "long_name": "Argentina",
-        "short_name": "AR",
-        "types": ["country", "political"]
-      }
-    ],
-    "formatted_address": "Buenos Aires, Argentina",
-    "geometry": {
-      "bounds": {
-        "northeast": {
-          "lat": -34.5265464,
-          "lng": -58.33514470000001
-        },
-        "southwest": {
-          "lat": -34.7051011,
-          "lng": -58.5314522
-        }
-      },
-      "location": {
-        "lat": -34.6036844,
-        "lng": -58.3815591
-      },
-      "location_type": "APPROXIMATE",
-      "viewport": {
-        "northeast": {
-          "lat": -34.5265464,
-          "lng": -58.33514470000001
-        },
-        "southwest": {
-          "lat": -34.7051011,
-          "lng": -58.5314522
-        }
-      }
-    },
-    "place_id": "ChIJvQz5TjvKvJURh47oiC6Bs6A",
-    "types": ["locality", "political"],
-    "timezone": {
-      "dstOffset": 0,
-      "rawOffset": -10800,
-      "status": "OK",
-      "timeZoneId": "America/Buenos_Aires",
-      "timeZoneName": "Argentina Standard Time"
-    },
-    "abbreviation": "-03"
   }
 ]

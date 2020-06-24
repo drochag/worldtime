@@ -89,3 +89,21 @@ export interface SuggestionsListProps extends Pick<SuggestionProps, 'onRemove'> 
   selectedSuggestions: ExtendedSuggestion[]
   time: date
 }
+
+export interface TimesListProps
+  extends Pick<SuggestionsListProps, 'selectedSuggestions' | 'time'> {}
+
+export interface TimeProps {
+  time: date
+  difference: number
+  setHighlighted: (idx: number) => void
+}
+
+export interface HourProps {
+  idx: number
+  difference: number
+  time: date
+  isFirst: boolean
+  isLast: boolean
+  setHighlighted: (idx: number) => void
+}

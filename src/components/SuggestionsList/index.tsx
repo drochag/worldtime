@@ -7,7 +7,7 @@ const SuggestionsList: React.FC<SuggestionsListProps> = ({
   selectedSuggestions,
   time,
 }) => (
-  <div className="mt-4">
+  <div className="pt-4 sticky left-0 bg-white pr-4 z-10">
     {selectedSuggestions.map((suggestion, idx) => (
       <SuggestionRow
         key={suggestion.formatted_address}

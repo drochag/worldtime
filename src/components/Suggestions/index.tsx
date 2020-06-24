@@ -3,6 +3,7 @@ import SuggestionsList from 'components/SuggestionsList'
 import { getExtendedSuggestion } from 'components/api'
 import { SuggestionsProps, SuggestionsState, Suggestion } from 'types'
 import info from './info.json'
+import TimesList from 'components/TimesList'
 
 class Suggestions extends React.Component<SuggestionsProps> {
   state: SuggestionsState = {
@@ -33,11 +34,14 @@ class Suggestions extends React.Component<SuggestionsProps> {
           onSelect: this.selectSuggestion,
           loading: this.state.loading,
         })}
-        <SuggestionsList
-          time={this.props.time}
-          selectedSuggestions={this.state.selectedSuggestions}
-          onRemove={this.removeSuggestion}
-        />
+        <div className="overflow-x-auto flex relative">
+          <SuggestionsList
+            time={this.props.time}
+            selectedSuggestions={this.state.selectedSuggestions}
+            onRemove={this.removeSuggestion}
+          />
+          <TimesList time={this.props.time} selectedSuggestions={this.state.selectedSuggestions} />
+        </div>
       </div>
     )
   }

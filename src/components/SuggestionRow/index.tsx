@@ -5,17 +5,21 @@ import City from 'components/City'
 import { AddressComponent, SuggestionProps } from 'types'
 
 const rowClassNames = `
-  w-full
   flex
   items-center
   mb-4
-  px-4
+  px-2
+  h-16
 `
 
 const circleClassNames = `
-  w-10 rounded-full bg-sand flex
-  h-10 items-center justify-center
-  mr-2
+  w-8 rounded-full bg-sand flex
+  h-8 items-center justify-center
+  md:mr-2
+  text-sm
+  md:w-10
+  md:h-10
+  md:text-lg
 `
 
 const getName = (components: AddressComponent[], types: string[]): string => {
@@ -39,7 +43,7 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
 
   return (
     <div className={rowClassNames} key={suggestion.formatted_address}>
-      <div className="w-10">
+      <div className="md:w-10 w-6 text-sm md:text-lg">
         <FontAwesomeIcon icon={faTrash} className="mr-3" onClick={onClick} />
       </div>
       <div className={circleClassNames}>

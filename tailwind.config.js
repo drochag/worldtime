@@ -12,6 +12,10 @@ module.exports = {
       },
       spacing: {
         '80': '20rem',
+        '108': '27rem',
+      },
+      fontSize: {
+        xxs: '0.5rem',
       },
     },
     screens: {
@@ -366,6 +370,7 @@ module.exports = {
     },
     opacity: {
       '0': '0',
+      '20': '0.2',
       '25': '0.25',
       '50': '0.5',
       '75': '0.75',
