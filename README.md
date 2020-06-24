@@ -26,11 +26,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
     You'll get your preferred browser opened with the live app
 
+    This project depends of 1 environment variable:
+
+    - REACT_APP_GOOGLE_MAPS_API_KEY: Get a Google API key with `/geocode` and `/timezone` endpoints permissions
+
 ## 🧐 What's inside?
 
-This project depends of 1 environment variable:
-
-1. REACT_APP_GOOGLE_MAPS_API_KEY: Get a Google API key with `/geocode` and `/timezone` endpoints permissions
+1. Search for your preferred locations to see them on the list 🔎
+1. Remove the desired locations with the trash icon at the left of each row 🗑️
+1. Use the ruler to check equivalents in time while aligning other times 📏
+1. Use it as a PWA and save it to your phone 😲
+1. It automatically caches your search, so whenever you open the app/website you'll see your previous searches 😊
 
 ## 📝 TODO
 
