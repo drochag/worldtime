@@ -19,10 +19,12 @@ export interface ExtendedSuggestion extends Suggestion {
 export interface SuggestionsState {
   selectedSuggestions: ExtendedSuggestion[]
   loading: boolean
+  noSuggestions: boolean
 }
 
 export interface SearchProps {
   onSelect: (suggestion: Suggestion) => void
+  onSuggestionsShown: (isEmpty: boolean) => void
   loading: boolean
 }
 

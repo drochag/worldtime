@@ -6,11 +6,12 @@ import { SuggestionsProps, SuggestionsState, Suggestion } from 'types'
 import TimesList from 'components/TimesList'
 import ls from 'local-storage'
 
-class Suggestions extends React.Component<SuggestionsProps> {
+class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
   state: SuggestionsState = {
     loading: false,
     selectedSuggestions: ls('suggestions') || [],
     // selectedSuggestions: info, // debugging purposes
+    noSuggestions: false,
   }
 
   selectSuggestion = (suggestion: Suggestion) => {
@@ -31,16 +32,33 @@ class Suggestions extends React.Component<SuggestionsProps> {
     this.setState({ selectedSuggestions })
   }
 
+  onSuggestionsShown = (isEmpty: boolean) => {
+    this.setState({ noSuggestions: isEmpty })
+  }
+
   render() {
     return (
       <div className="w-full p-3 bg-white mt-10 rounded-lg shadow-xl">
         {this.props.children({
           onSelect: this.selectSuggestion,
+          onSuggestionsShown: this.onSuggestionsShown,
           loading: this.state.loading,
         })}
-        <div className="md:hidden mt-4 text-center text-apricot font-medium">
-          Tap a time to move the ruler
-        </div>
+        {this.state.selectedSuggestions.length > 0 && (
+          <div className="md:hidden mt-4 text-center text-apricot font-medium">
+            Tap a time to move the ruler.
+          </div>
+        )}
+        {!this.state.selectedSuggestions.length && (
+          <div className="mt-4 text-center text-apricot font-medium">
+            Search a place to show its time.
+          </div>
+        )}
+        {this.state.noSuggestions && (
+          <div className="mt-4 text-center text-apricot font-medium">
+            Nothing found with that name, try again.
+          </div>
+        )}
         <div className="overflow-x-auto flex relative xxl:justify-center">
           <SuggestionsList
             time={this.props.time}

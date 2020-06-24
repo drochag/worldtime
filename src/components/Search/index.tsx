@@ -19,7 +19,11 @@ const inputClassNames = `
 const renderSuggestion = suggestion => <div>{suggestion.formatted_address}</div>
 const getSuggestionValue = (s: string) => s
 
-const Search: React.FC<SearchProps> = ({ onSelect, loading: loadingParent }) => {
+const Search: React.FC<SearchProps> = ({
+  onSelect,
+  loading: loadingParent,
+  onSuggestionsShown,
+}) => {
   const [suggestions, setSuggestions] = useState<Suggestion[]>([])
   const [value, setValue] = useState('')
   const [loading, setLoading] = useState(false)
@@ -33,6 +37,7 @@ const Search: React.FC<SearchProps> = ({ onSelect, loading: loadingParent }) => 
       setLoading(true)
       getPlaces(search).then(data => {
         setSuggestions(data)
+        onSuggestionsShown(!data.length)
         setLoading(false)
       })
     }, 750),
@@ -41,7 +46,10 @@ const Search: React.FC<SearchProps> = ({ onSelect, loading: loadingParent }) => 
 
   const onInputChange = (event: ChangeEvent<HTMLInputElement>, { newValue }) => setValue(newValue)
   const onSuggestionsFetchRequested = ({ value: search }) => getSuggestions(search)
-  const onSuggestionsClearRequested = () => setSuggestions([])
+  const onSuggestionsClearRequested = () => {
+    setSuggestions([])
+    onSuggestionsShown(false)
+  }
   const onSuggestionSelected = (event: ChangeEvent<HTMLInputElement>, { suggestion }) => {
     onSelect(suggestion)
     setValue('')
