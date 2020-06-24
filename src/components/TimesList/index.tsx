@@ -17,7 +17,7 @@ const getStyles = ({
   ...(highlighted !== undefined && { zIndex: '4' }),
 })
 
-const TimesList: React.FC<TimesListProps> = ({ selectedSuggestions, time }) => {
+const TimesList: React.FC<TimesListProps> = React.memo(({ selectedSuggestions, time }) => {
   const [highlighted, setHighlighted] = useState(1)
   const removeHighlight = useCallback(() => setHighlighted(1), [])
   return (
@@ -42,6 +42,6 @@ const TimesList: React.FC<TimesListProps> = ({ selectedSuggestions, time }) => {
       ))}
     </div>
   )
-}
+})
 
 export default TimesList

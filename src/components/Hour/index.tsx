@@ -26,7 +26,7 @@ const getHourClasses = (hours: number, idx: number): string => {
   return [timeClass, borderClass, hourClass].join(' ')
 }
 
-const Hour: React.FC<HourProps> = ({ idx, difference, time, setHighlighted }) => {
+const Hour: React.FC<HourProps> = React.memo(({ idx, difference, time, setHighlighted }) => {
   const calculatedTime = new Date(time)
   calculatedTime.setHours(calculatedTime.getHours() - 1 + difference + idx)
 
@@ -60,6 +60,6 @@ const Hour: React.FC<HourProps> = ({ idx, difference, time, setHighlighted }) =>
       <span className="date text-xxs">{calculatedTime.getDate()}</span>
     </div>
   )
-}
+})
 
 export default Hour
