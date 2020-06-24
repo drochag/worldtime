@@ -4,7 +4,7 @@ import Search from 'components/Search'
 import Suggestions from 'components/Suggestions'
 
 const App: React.FC = () => {
-  const [time, setTime] = useState(new Date())
+  const [time, setTime] = useState(new Date(1593019755664))
   useEffect(() => {
     const interval = setInterval(() => {
       setTime(new Date())

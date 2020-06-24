@@ -35,6 +35,77 @@
   },
   {
     "address_components": [
+      { "long_name": "Argentina", "short_name": "AR", "types": ["country", "political"] }
+    ],
+    "formatted_address": "Argentina",
+    "geometry": {
+      "bounds": {
+        "northeast": { "lat": -21.7810459, "lng": -53.637481 },
+        "southwest": { "lat": -55.1250224, "lng": -73.5603601 }
+      },
+      "location": { "lat": -38.416097, "lng": -63.61667199999999 },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "northeast": { "lat": -21.7810459, "lng": -53.637481 },
+        "southwest": { "lat": -55.1250224, "lng": -73.5603601 }
+      }
+    },
+    "place_id": "ChIJZ8b99fXKvJURqA_wKpl3Lz0",
+    "types": ["country", "political"],
+    "timezone": {
+      "dstOffset": 0,
+      "rawOffset": -10800,
+      "status": "OK",
+      "timeZoneId": "America/Argentina/Salta",
+      "timeZoneName": "Argentina Standard Time"
+    },
+    "abbreviation": "-03"
+  },
+  {
+    "address_components": [
+      {
+        "long_name": "Novosibirsk",
+        "short_name": "Novosibirsk",
+        "types": ["locality", "political"]
+      },
+      {
+        "long_name": "Gorod Novosibirsk",
+        "short_name": "Gorod Novosibirsk",
+        "types": ["administrative_area_level_2", "political"]
+      },
+      {
+        "long_name": "Novosibirsk Oblast",
+        "short_name": "Novosibirsk Oblast",
+        "types": ["administrative_area_level_1", "political"]
+      },
+      { "long_name": "Russia", "short_name": "RU", "types": ["country", "political"] }
+    ],
+    "formatted_address": "Novosibirsk, Novosibirsk Oblast, Russia",
+    "geometry": {
+      "bounds": {
+        "northeast": { "lat": 55.139807, "lng": 83.15829389999999 },
+        "southwest": { "lat": 54.800147, "lng": 82.740516 }
+      },
+      "location": { "lat": 54.9832693, "lng": 82.8963831 },
+      "location_type": "APPROXIMATE",
+      "viewport": {
+        "northeast": { "lat": 55.139807, "lng": 83.15829389999999 },
+        "southwest": { "lat": 54.800147, "lng": 82.740516 }
+      }
+    },
+    "place_id": "ChIJl03MkOHl30IRhenT4XMGOps",
+    "types": ["locality", "political"],
+    "timezone": {
+      "dstOffset": 0,
+      "rawOffset": 25200,
+      "status": "OK",
+      "timeZoneId": "Asia/Novosibirsk",
+      "timeZoneName": "Novosibirsk Standard Time"
+    },
+    "abbreviation": "+07"
+  },
+  {
+    "address_components": [
       {
         "long_name": "Los Angeles",
         "short_name": "Los Angeles",
@@ -153,43 +224,5 @@
       "timeZoneName": "Australian Eastern Standard Time"
     },
     "abbreviation": "AEST"
-  },
-  {
-    "address_components": [
-      {
-        "long_name": "San Francisco Bay Area",
-        "short_name": "San Francisco Bay Area",
-        "types": ["colloquial_area", "political"]
-      },
-      {
-        "long_name": "California",
-        "short_name": "CA",
-        "types": ["administrative_area_level_1", "political"]
-      },
-      { "long_name": "United States", "short_name": "US", "types": ["country", "political"] }
-    ],
-    "formatted_address": "San Francisco Bay Area, CA, USA",
-    "geometry": {
-      "bounds": {
-        "northeast": { "lat": 38.8642448, "lng": -121.208178 },
-        "southwest": { "lat": 36.8941549, "lng": -123.632497 }
-      },
-      "location": { "lat": 37.8271784, "lng": -122.2913078 },
-      "location_type": "APPROXIMATE",
-      "viewport": {
-        "northeast": { "lat": 38.8642448, "lng": -121.208178 },
-        "southwest": { "lat": 36.8941549, "lng": -123.632497 }
-      }
-    },
-    "place_id": "ChIJtdeIpqODhYARqR9GV4QbiYw",
-    "types": ["colloquial_area", "political"],
-    "timezone": {
-      "dstOffset": 3600,
-      "rawOffset": -28800,
-      "status": "OK",
-      "timeZoneId": "America/Los_Angeles",
-      "timeZoneName": "Pacific Daylight Time"
-    },
-    "abbreviation": "PDT"
   }
 ]

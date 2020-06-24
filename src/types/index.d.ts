@@ -103,7 +103,5 @@ export interface HourProps {
   idx: number
   difference: number
   time: date
-  isFirst: boolean
-  isLast: boolean
   setHighlighted: (idx: number) => void
 }

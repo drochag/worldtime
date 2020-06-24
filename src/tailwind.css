@@ -3,6 +3,7 @@
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500;700&display=swap');
 
+/* purgecss start ignore */
 .react-autosuggest__container {
   @apply relative w-full inline-block;
 }
@@ -36,3 +37,4 @@
 .react-autosuggest__suggestion--highlighted {
   @apply bg-apricot bg-opacity-25 text-gray-800;
 }
+/* purgecss end ignore */

@@ -13,6 +13,7 @@ const rowClassNames = `
 `
 
 const circleClassNames = `
+  circle
   w-8 rounded-full bg-sand flex
   h-8 items-center justify-center
   md:mr-2
@@ -22,7 +23,7 @@ const circleClassNames = `
   md:text-lg
 `
 
-const getName = (components: AddressComponent[], types: string[]): string => {
+export const getName = (components: AddressComponent[], types: string[]): string => {
   const address = components.find(
     component => component.types[0] === types[0] && component.types[1] === types[1]
   )
@@ -60,16 +61,13 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
       <City
         difference={difference}
         country={
-          suggestion.address_components.find(component => component.types[0] === 'country')
-            ?.short_name || ''
+          suggestion.address_components.find(component =>
+            component.types.find(type => type === 'country')
+          )?.short_name || ''
         }
         time={time}
         name={getName(suggestion.address_components, suggestion.types)}
-        abbreviation={
-          Number.isNaN(Number(suggestion.abbreviation))
-            ? suggestion.abbreviation
-            : 'GMT' + suggestion.abbreviation
-        }
+        abbreviation={suggestion.abbreviation}
       />
     </div>
   )

@@ -11,8 +11,6 @@ const TimeRow: React.FC<TimeProps> = ({ time, difference, setHighlighted }) => (
       <Hour
         idx={idx}
         key={idx}
-        isFirst={idx === 0}
-        isLast={idx === hoursInDay - 1}
         time={time}
         difference={difference}
         setHighlighted={setHighlighted}

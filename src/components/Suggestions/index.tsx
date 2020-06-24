@@ -2,7 +2,7 @@ import React from 'react'
 import SuggestionsList from 'components/SuggestionsList'
 import { getExtendedSuggestion } from 'components/api'
 import { SuggestionsProps, SuggestionsState, Suggestion } from 'types'
-import info from './info.json'
+// import info from './info.json' // debugging purposes
 import TimesList from 'components/TimesList'
 import ls from 'local-storage'
 

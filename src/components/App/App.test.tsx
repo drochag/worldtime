@@ -1,9 +1,19 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { shallow } from 'enzyme'
 import App from '.'
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />)
-  const linkElement = getByText(/learn react/i)
-  expect(linkElement).toBeInTheDocument()
+describe('App', () => {
+  it('renders without crashing', () => {
+    shallow(<App />)
+  })
+
+  it('contains a title', () => {
+    const app = shallow(<App />)
+    const title = (
+      <h1 className="text-4xl md:text-6xl text-white leading-tight mt-12 text-center">
+        WorldtimeLite
+      </h1>
+    )
+    expect(app.contains(title)).toEqual(true)
+  })
 })

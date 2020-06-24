@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { HourProps } from 'types'
 
-const getHourClasses = (hours: number, isFirst: boolean, isLast: boolean): string => {
+const getHourClasses = (hours: number, idx: number): string => {
   const hourClass =
     'relative w-8 h-12 text-sm flex flex-col justify-center items-center text-semibold flex-grow'
   let timeClass = ''
@@ -15,49 +15,49 @@ const getHourClasses = (hours: number, isFirst: boolean, isLast: boolean): strin
     timeClass = 'bg-gray-200 '
   }
 
-  if (isFirst || hours === 0) {
+  if (idx === 0 || hours === 0) {
     borderClass = 'rounded-l-lg '
   }
 
-  if (isLast || hours === 23) {
+  if (idx === 23 || hours === 23) {
     borderClass += 'rounded-r-lg '
   }
 
   return [timeClass, borderClass, hourClass].join(' ')
 }
 
-const Hour: React.FC<HourProps> = ({ idx, difference, isFirst, isLast, time, setHighlighted }) => {
+const Hour: React.FC<HourProps> = ({ idx, difference, time, setHighlighted }) => {
   const calculatedTime = new Date(time)
   calculatedTime.setHours(calculatedTime.getHours() - 1 + difference + idx)
 
   const hours = calculatedTime.getHours()
   const isPM = hours >= 12
-  const hourClass = getHourClasses(hours, isFirst, isLast)
+  const hourClass = getHourClasses(hours, idx)
 
   const setHighlight = useCallback(() => setHighlighted(idx), [idx, setHighlighted])
 
   if (hours !== 0) {
     return (
       <div className={hourClass} onClick={setHighlight} onMouseEnter={setHighlight}>
-        <span>{isPM ? (hours - 12 === 0 ? 12 : hours - 12) : hours}</span>
-        <span className="text-xxs">{isPM ? 'pm' : 'am'}</span>
+        <span className="hour">{isPM ? (hours - 12 === 0 ? 12 : hours - 12) : hours}</span>
+        <span className="time text-xxs">{isPM ? 'pm' : 'am'}</span>
       </div>
     )
   }
 
   return (
     <div className={hourClass} onClick={setHighlight} onMouseEnter={setHighlight}>
-      <span className="text-xxs mt-1 absolute mb-1 text-black" style={{ top: '-1.5rem' }}>
+      <span className="day text-xxs mt-1 absolute mb-1 text-black" style={{ top: '-1.5rem' }}>
         {new Intl.DateTimeFormat('en-US', {
           weekday: 'short',
         }).format(calculatedTime)}
       </span>
-      <span className="text-xxs mt-1 mb-1">
+      <span className="month text-xxs mt-1 mb-1">
         {new Intl.DateTimeFormat('en-US', {
           month: 'short',
         }).format(calculatedTime)}
       </span>
-      <span className="text-xxs">{calculatedTime.getDate()}</span>
+      <span className="date text-xxs">{calculatedTime.getDate()}</span>
     </div>
   )
 }
