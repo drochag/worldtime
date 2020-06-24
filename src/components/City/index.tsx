@@ -4,6 +4,7 @@ import { CityProps } from 'types'
 const City: React.FC<CityProps> = ({ name, time, country, difference, abbreviation }) => {
   const date = new Date(time)
   date.setHours(date.getHours() + difference)
+
   return (
     <div className="ml-2 w-32 md:w-80 text-xs md:text-base flex justify-between flex-col md:flex-row">
       <div className="flex flex-row md:flex-col justify-between md:justify-center">

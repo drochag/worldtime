@@ -13,7 +13,7 @@ const getStyles = ({
   height: suggestions * 5 - 2 + 'rem',
   top: '.5rem',
   left: highlighted !== undefined ? highlighted * 2 + 'rem' : '2rem',
-  transition: 'left 300ms ease-in-out',
+  transition: 'left 300ms ease',
   ...(highlighted !== undefined && { zIndex: '4' }),
 })
 

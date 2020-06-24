@@ -4,21 +4,25 @@ import { getExtendedSuggestion } from 'components/api'
 import { SuggestionsProps, SuggestionsState, Suggestion } from 'types'
 import info from './info.json'
 import TimesList from 'components/TimesList'
+import ls from 'local-storage'
 
 class Suggestions extends React.Component<SuggestionsProps> {
   state: SuggestionsState = {
     loading: false,
-    selectedSuggestions: info,
+    selectedSuggestions: ls('suggestions') || [],
+    // selectedSuggestions: info, // debugging purposes
   }
 
   selectSuggestion = (suggestion: Suggestion) => {
     this.setState({ loading: true })
-    getExtendedSuggestion(suggestion).then(extendedSuggestion =>
+    getExtendedSuggestion(suggestion).then(extendedSuggestion => {
+      const newSuggestions = [...this.state.selectedSuggestions, extendedSuggestion]
       this.setState({
         loading: false,
-        selectedSuggestions: [...this.state.selectedSuggestions, extendedSuggestion],
+        selectedSuggestions: newSuggestions,
       })
-    )
+      ls('suggestions', newSuggestions)
+    })
   }
 
   removeSuggestion = (idx: number) => {
@@ -34,6 +38,9 @@ class Suggestions extends React.Component<SuggestionsProps> {
           onSelect: this.selectSuggestion,
           loading: this.state.loading,
         })}
+        <div className="md:hidden mt-4 text-center text-apricot font-medium">
+          Tap a time to move the ruler
+        </div>
         <div className="overflow-x-auto flex relative xxl:justify-center">
           <SuggestionsList
             time={this.props.time}

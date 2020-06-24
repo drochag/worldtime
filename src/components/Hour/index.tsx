@@ -34,12 +34,7 @@ const Hour: React.FC<HourProps> = ({ idx, difference, isFirst, isLast, time, set
   const isPM = hours >= 12
   const hourClass = getHourClasses(hours, isFirst, isLast)
 
-  const setHighlight = useCallback(
-    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
-      setHighlighted(idx)
-    },
-    [idx, setHighlighted]
-  )
+  const setHighlight = useCallback(() => setHighlighted(idx), [idx, setHighlighted])
 
   if (hours !== 0) {
     return (

@@ -32,7 +32,6 @@ const Search: React.FC<SearchProps> = ({ onSelect, loading: loadingParent }) => 
 
       setLoading(true)
       getPlaces(search).then(data => {
-        console.log(data)
         setSuggestions(data)
         setLoading(false)
       })
