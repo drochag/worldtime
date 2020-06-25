@@ -6,6 +6,7 @@ import info from '../Suggestions/info.json'
 import SuggestionRow from '.'
 
 const onRemove = sinon.spy()
+const setHome = sinon.spy()
 
 describe('SuggestionRow', () => {
   it('renders without crashing', () => {
@@ -15,6 +16,7 @@ describe('SuggestionRow', () => {
         idx={0}
         suggestion={info[0]}
         onRemove={onRemove}
+        setHome={setHome}
         time={new Date()}
       />
     )
@@ -27,6 +29,7 @@ describe('SuggestionRow', () => {
         idx={0}
         suggestion={info[0]}
         onRemove={onRemove}
+        setHome={setHome}
         time={new Date()}
       />
     )
@@ -40,6 +43,7 @@ describe('SuggestionRow', () => {
         idx={0}
         suggestion={info[0]}
         onRemove={onRemove}
+        setHome={setHome}
         time={new Date()}
       />
     )
@@ -53,6 +57,7 @@ describe('SuggestionRow', () => {
         idx={1}
         suggestion={info[0]}
         onRemove={onRemove}
+        setHome={setHome}
         time={new Date()}
       />
     )
@@ -73,11 +78,29 @@ describe('SuggestionRow', () => {
         idx={1}
         suggestion={info[0]}
         onRemove={onRemove}
+        setHome={setHome}
         time={new Date()}
       />
     )
 
     wrapper.find('.fa-trash').simulate('click')
     expect(onRemove.calledOnce).toBe(true)
+    expect(onRemove.calledWith(1)).toBe(true)
+  })
+
+  it('should call onRemove when clicking the trash icon', () => {
+    const wrapper = mount(
+      <SuggestionRow
+        difference={-5}
+        idx={1}
+        suggestion={info[0]}
+        onRemove={onRemove}
+        setHome={setHome}
+        time={new Date()}
+      />
+    )
+
+    wrapper.find('.circle').simulate('click')
+    expect(setHome.calledOnce).toBe(true)
   })
 })

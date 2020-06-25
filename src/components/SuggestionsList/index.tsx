@@ -4,6 +4,7 @@ import { SuggestionsListProps } from 'types'
 
 const SuggestionsList: React.FC<SuggestionsListProps> = ({
   onRemove,
+  setHome,
   selectedSuggestions,
   time,
 }) => (
@@ -13,6 +14,7 @@ const SuggestionsList: React.FC<SuggestionsListProps> = ({
         key={suggestion.formatted_address}
         idx={idx}
         onRemove={onRemove}
+        setHome={setHome}
         suggestion={suggestion}
         time={time}
         difference={

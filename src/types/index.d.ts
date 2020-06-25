@@ -81,13 +81,14 @@ export interface CityProps {
 
 export interface SuggestionProps {
   onRemove: (idx: number) => void
+  setHome: (idx: number) => void
   suggestion: ExtendedSuggestion
   difference: number
   idx: number
   time: date
 }
 
-export interface SuggestionsListProps extends Pick<SuggestionProps, 'onRemove'> {
+export interface SuggestionsListProps extends Pick<SuggestionProps, 'onRemove' | 'setHome'> {
   selectedSuggestions: ExtendedSuggestion[]
   time: date
 }

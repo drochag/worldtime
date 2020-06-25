@@ -13,7 +13,7 @@ const rowClassNames = `
 `
 
 const circleClassNames = `
-  circle
+  circle cursor-pointer
   w-8 rounded-full bg-sand flex
   h-8 items-center justify-center
   md:mr-2
@@ -38,9 +38,11 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
   onRemove,
   idx,
   difference,
+  setHome,
   time,
 }) => {
   const onClick = useCallback(() => onRemove(idx), [idx, onRemove])
+  const onClickDifference = useCallback(() => setHome(idx), [idx, setHome])
 
   return (
     <div className={rowClassNames} key={suggestion.formatted_address}>
@@ -48,8 +50,8 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
         <div className="md:w-10 w-6 text-sm md:text-lg">
           <FontAwesomeIcon icon={faTrash} className="md:mr-3 mb-2 md:mb-0" onClick={onClick} />
         </div>
-        <div className={circleClassNames}>
-          {idx === 0 && <FontAwesomeIcon icon={faHome} onClick={onClick} />}
+        <div className={circleClassNames} onClick={onClickDifference}>
+          {idx === 0 && <FontAwesomeIcon icon={faHome} />}
           {idx !== 0 && (
             <>
               {difference > 0 && '+'}

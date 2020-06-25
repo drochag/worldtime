@@ -14,6 +14,15 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
     noSuggestions: false,
   }
 
+  setHome = (homeIdx: number) => {
+    const selectedSuggestions = [
+      this.state.selectedSuggestions[homeIdx],
+      ...this.state.selectedSuggestions.filter((s, idx) => idx !== homeIdx),
+    ]
+    this.setState({ selectedSuggestions })
+    ls('suggestions', selectedSuggestions)
+  }
+
   selectSuggestion = (suggestion: Suggestion) => {
     this.setState({ loading: true })
     getExtendedSuggestion(suggestion).then(extendedSuggestion => {
@@ -45,14 +54,15 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
           onSuggestionsShown: this.onSuggestionsShown,
           loading: this.state.loading,
         })}
-        {this.state.selectedSuggestions.length > 0 && (
-          <div className="md:hidden mt-4 text-center text-apricot font-medium">
-            Tap a time to move the ruler.
-          </div>
-        )}
         {!this.state.selectedSuggestions.length && (
           <div className="mt-4 text-center text-apricot font-medium">
             Search a place to show its time.
+          </div>
+        )}
+        {this.state.selectedSuggestions.length && (
+          <div className="mt-4 text-center text-apricot font-medium">
+            <span className="md:hidden mr-2">Tap a time to move the ruler.</span>
+            You can tap the circles to set that location as your home.
           </div>
         )}
         {this.state.noSuggestions && (
@@ -65,6 +75,7 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
             time={this.props.time}
             selectedSuggestions={this.state.selectedSuggestions}
             onRemove={this.removeSuggestion}
+            setHome={this.setHome}
           />
           <TimesList time={this.props.time} selectedSuggestions={this.state.selectedSuggestions} />
         </div>
