@@ -19,6 +19,7 @@ export interface ExtendedSuggestion extends Suggestion {
 export interface SuggestionsState {
   selectedSuggestions: ExtendedSuggestion[]
   loading: boolean
+  existingSuggestion: boolean
   noSuggestions: boolean
 }
 
