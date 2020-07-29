@@ -10,7 +10,7 @@ const googleMapsInstance = axios.create({
 })
 
 const worldTimeInstance = axios.create({
-  baseURL: 'http://worldtimeapi.org/api/timezone/',
+  baseURL: 'https://worldtimeapi.org/api/timezone/',
 })
 
 googleMapsInstance.interceptors.request.use(config => ({
