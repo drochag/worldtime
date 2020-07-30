@@ -17,8 +17,12 @@ const SuggestionsList: React.FC<SuggestionsListProps> = ({
         setHome={setHome}
         suggestion={suggestion}
         time={time}
-        difference={
-          (suggestion.timezone.rawOffset - selectedSuggestions[0].timezone.rawOffset) / 60 / 60
+        homeTime={
+          new Date(
+            new Date(time).toLocaleString('en-US', {
+              timeZone: selectedSuggestions[0].timezone.timeZoneId,
+            })
+          )
         }
       />
     ))}

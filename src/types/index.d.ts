@@ -84,7 +84,7 @@ export interface SuggestionProps {
   onRemove: (idx: number) => void
   setHome: (idx: number) => void
   suggestion: ExtendedSuggestion
-  difference: number
+  homeTime: date
   idx: number
   time: date
 }

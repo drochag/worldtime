@@ -37,17 +37,23 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
   suggestion,
   onRemove,
   idx,
-  difference,
+  homeTime,
   setHome,
   time,
 }) => {
   const onClick = useCallback(() => onRemove(idx), [idx, onRemove])
   const onClickDifference = useCallback(() => setHome(idx), [idx, setHome])
+  const suggestionTime = new Date(
+    new Date(time).toLocaleString('en-US', { timeZone: suggestion.timezone.timeZoneId })
+  )
 
+  let difference = suggestionTime.getTime() - homeTime.getTime()
+
+  difference /= 60 * 60 * 1000
   return (
     <div className={rowClassNames} key={suggestion.formatted_address}>
       <div className="flex items-center text-center md:text-left align-center flex-col md:flex-row">
-        <div className="md:w-10 w-6 text-sm md:text-lg">
+        <div className="md:w-10 w-6 text-sm md:text-lg cursor-pointer">
           <FontAwesomeIcon icon={faTrash} className="md:mr-3 mb-2 md:mb-0" onClick={onClick} />
         </div>
         <div className={circleClassNames} onClick={onClickDifference}>
