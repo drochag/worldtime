@@ -43,4 +43,3 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 1. Tests: Most of the components are tested, however the coverage is about 40% which can be improved.
 1. Location could be detected so the home location would appear instantly and automatically as first picked location (Home).
 1. Rearrangement with drag and drop for the locations.
-1. Host it on SSH so Service worker can be enabled.
