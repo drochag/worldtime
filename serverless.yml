@@ -1,6 +1,6 @@
 org: drochag1
 app: worldtime
-service: worldtime
+service: api
 
 frameworkVersion: '2'
 
