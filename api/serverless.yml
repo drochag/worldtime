@@ -8,6 +8,8 @@ provider:
   name: aws
   runtime: nodejs12.x
   lambdaHashingVersion: '20201221'
+  environment:
+    GOOGLE_MAPS_API_KEY: ${param:GOOGLE_MAPS_API_KEY}
 
 functions:
   hello:
@@ -16,3 +18,15 @@ functions:
       - http:
           path: /
           method: get
+  getPlaces:
+    handler: handler.getPlaces
+    events:
+      - http:
+          path: /get-places
+          method: post
+  getExtendedSuggestion:
+    handler: handler.getExtendedSuggestion
+    events:
+      - http:
+          path: /get-extended-suggestion
+          method: post
