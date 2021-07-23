@@ -16,19 +16,28 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
     Navigate into your new site’s directory and start it up.
 
+    Configure and deploy the serverless api
+    
+    ```shell
+      cd api
+      serverless deploy
+    ```
+
+    Configure and run the front end app
+
     ```shell
     cd worldtime/
     cp .env.template .env
-    # modify that new .enf file with the Google API key
+    # modify that new .env file with the recently deployed API
     npm i
     npm start
     ```
 
     You'll get your preferred browser opened with the live app
 
-    This project depends of 1 environment variable:
+    This project depends of 1 environment variable sent to the serverless API through the dashboard:
 
-    - REACT_APP_GOOGLE_MAPS_API_KEY: Get a Google API key with `/geocode` and `/timezone` endpoints permissions
+    - GOOGLE_MAPS_API_KEY: Get a Google API key with `/geocode` and `/timezone` endpoints permissions
 
 ## 🧐 What's inside?
 

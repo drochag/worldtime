@@ -36,6 +36,10 @@ const Search: React.FC<SearchProps> = ({
 
       setLoading(true)
       getPlaces(search).then(data => {
+        console.log(data)
+        if (!data) {
+          return
+        }
         setSuggestions(data)
         onSuggestionsShown(!data.length)
         setLoading(false)

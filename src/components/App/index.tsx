@@ -5,10 +5,13 @@ import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
 import Search from 'components/Search'
 import Suggestions from 'components/Suggestions'
+import { getHello } from 'components/api'
 
 const App: React.FC = () => {
   const [time, setTime] = useState(new Date())
   useEffect(() => {
+    getHello()
+    .then(res => console.log(res))
     const interval = setInterval(() => {
       setTime(new Date())
     }, 1000 * 60)

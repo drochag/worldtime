@@ -1,7 +1,7 @@
 import React from 'react'
 import SuggestionsList from 'components/SuggestionsList'
 import { getExtendedSuggestion } from 'components/api'
-import { SuggestionsProps, SuggestionsState, Suggestion } from 'types'
+import { SuggestionsProps, SuggestionsState, Suggestion, ExtendedSuggestion } from 'types'
 // import info from './info.json' // debugging purposes
 import TimesList from 'components/TimesList'
 import ls from 'local-storage'
@@ -26,7 +26,11 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
 
   selectSuggestion = (suggestion: Suggestion) => {
     this.setState({ loading: true })
-    getExtendedSuggestion(suggestion).then(extendedSuggestion => {
+    getExtendedSuggestion(suggestion).then((extendedSuggestion: void | ExtendedSuggestion) => {
+      if (!extendedSuggestion) {
+        return
+      }
+
       if (
         this.state.selectedSuggestions.find(
           s => s.formatted_address === extendedSuggestion.formatted_address

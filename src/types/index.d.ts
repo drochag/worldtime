@@ -11,10 +11,12 @@ export interface Timezone {
   timeZoneName: string
 }
 
-export interface ExtendedSuggestion extends Suggestion {
+export interface ServerSuggestion {
   timezone: Timezone
   abbreviation: string
 }
+
+export type ExtendedSuggestion = ServerSuggestion & Suggestion
 
 export interface SuggestionsState {
   selectedSuggestions: ExtendedSuggestion[]

@@ -1,73 +1,70 @@
-import axios from 'axios'
-import { Suggestion, ExtendedSuggestion, Timezone } from 'types'
+import axios, { AxiosError } from 'axios'
+import { Suggestion, ExtendedSuggestion, ServerSuggestion } from 'types'
 
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
 
-const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
-const googleMapsInstance = axios.create({
-  baseURL: proxyUrl + 'https://maps.googleapis.com/maps/api/',
+const apiInstance = axios.create({
+  baseURL: process.env.REACT_APP_WORLDTIME_API,
+  headers: {
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Origin': '*',
+  }
 })
 
-const worldTimeInstance = axios.create({
-  baseURL: 'https://worldtimeapi.org/api/timezone/',
-})
-
-googleMapsInstance.interceptors.request.use(config => ({
+apiInstance.interceptors.request.use(config => ({
   ...config,
   cancelToken: source.token,
-  params: {
-    key: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-    language: 'en-US',
-    ...config.params,
-  },
 }))
 
-export const getAbbreviation = timezone =>
-  worldTimeInstance(`/${timezone}`).then(res => res.data.abbreviation)
+export const getHello = () => apiInstance.get('/')
 
 export const getPlaces = (() => {
   const cache = {}
-  return (address: string): Promise<Suggestion[]> => {
+  return (address: string): Promise<void | Suggestion[]> => {
     if (cache[address]) {
       return cache[address]
     }
 
-    return (cache[address] = googleMapsInstance
-      .get('/geocode/json', {
-        params: {
-          address,
-        },
+    return apiInstance
+      .post('/get-places', { address })
+      .then(res => res.data as Suggestion[])
+      .then(suggestions => {
+        cache[address] = suggestions
+        return suggestions
       })
-      .then(res => res.data.results as Suggestion[]))
+      .catch((err: AxiosError) => {
+        console.log(err)
+      })
   }
 })()
 
 export const getExtendedSuggestion = (() => {
   const cache = {}
-  return (suggestion: Suggestion): Promise<ExtendedSuggestion> => {
-    const location = `${suggestion.geometry.location.lat},${suggestion.geometry.location.lng}`
+  return (suggestion: Suggestion): Promise<void | ExtendedSuggestion> => {
+    const { lat, lng } = suggestion.geometry.location
+    const location = `${lat},${lng}`
+
     if (cache[location]) {
       return cache[location]
     }
 
-    return (cache[location] = googleMapsInstance
-      .get('/timezone/json', {
-        params: {
-          location,
-          timestamp: Math.floor(Date.now() / 1000),
-        },
+    return apiInstance
+      .post('/get-extended-suggestion', { lat, lng })
+      .then(res => res.data as ServerSuggestion)
+      .then(({ abbreviation, timezone }) =>
+        ({
+          ...suggestion,
+          abbreviation,
+          timezone,
+        } as ExtendedSuggestion)
+      )
+      .then(extendedSuggestion => {
+        cache[location] = extendedSuggestion
+        return extendedSuggestion
       })
-      .then(res => res.data as Timezone)
-      .then(timezone =>
-        getAbbreviation(timezone.timeZoneId).then(
-          abbreviation =>
-            ({
-              ...suggestion,
-              timezone,
-              abbreviation,
-            } as ExtendedSuggestion)
-        )
-      ))
+      .catch((err: AxiosError) => {
+        console.log(err)
+      })
   }
 })()

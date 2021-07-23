@@ -18,15 +18,39 @@ functions:
       - http:
           path: /
           method: get
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Requested-With
+              - Accept
+              - Origin
+              - Access-Control-Allow-Origin
   getPlaces:
     handler: handler.getPlaces
     events:
       - http:
           path: /get-places
           method: post
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Requested-With
+              - Accept
+              - Origin
+              - Access-Control-Allow-Origin
   getExtendedSuggestion:
     handler: handler.getExtendedSuggestion
     events:
       - http:
           path: /get-extended-suggestion
           method: post
+          cors:
+            origin: '*'
+            headers:
+              - Content-Type
+              - X-Requested-With
+              - Accept
+              - Origin
+              - Access-Control-Allow-Origin
