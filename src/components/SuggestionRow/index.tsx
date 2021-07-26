@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { memo, useCallback } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faHome } from '@fortawesome/free-solid-svg-icons'
 import City from 'components/City'
@@ -41,7 +41,7 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
   setHome,
   time,
 }) => {
-  const onClick = useCallback(() => onRemove(idx), [idx, onRemove])
+  const onDelete = useCallback(() => onRemove(idx), [idx, onRemove])
   const onClickDifference = useCallback(() => setHome(idx), [idx, setHome])
   const suggestionTime = new Date(
     new Date(time).toLocaleString('en-US', { timeZone: suggestion.timezone.timeZoneId })
@@ -54,7 +54,7 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
     <div className={rowClassNames} key={suggestion.formatted_address}>
       <div className="flex items-center text-center md:text-left align-center flex-col md:flex-row">
         <div className="md:w-10 w-6 text-sm md:text-lg cursor-pointer">
-          <FontAwesomeIcon icon={faTrash} className="md:mr-3 mb-2 md:mb-0" onClick={onClick} />
+        <FontAwesomeIcon icon={faTrash} className="md:mr-3 mb-2 md:mb-0" onClick={onDelete} />
         </div>
         <div className={circleClassNames} onClick={onClickDifference}>
           {idx === 0 && <FontAwesomeIcon icon={faHome} />}
@@ -81,4 +81,4 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
   )
 }
 
-export default SuggestionRow
+export default memo(SuggestionRow)

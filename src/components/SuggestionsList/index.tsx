@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import SuggestionRow from 'components/SuggestionRow'
 import { SuggestionsListProps } from 'types'
 
@@ -29,4 +29,4 @@ const SuggestionsList: React.FC<SuggestionsListProps> = ({
   </div>
 )
 
-export default SuggestionsList
+export default memo(SuggestionsList)

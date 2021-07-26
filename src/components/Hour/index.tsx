@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React, { memo, useCallback } from 'react'
 import { HourProps } from 'types'
 
 const getHourClasses = (hours: number, idx: number): string => {
@@ -33,13 +33,14 @@ const Hour: React.FC<HourProps> = React.memo(({ idx, difference, time, setHighli
   const hours = calculatedTime.getHours()
   const isPM = hours >= 12
   const hourClass = getHourClasses(hours, idx)
+  const hasHalfDifference = difference - Math.floor(difference) === 0.5
 
   const setHighlight = useCallback(() => setHighlighted(idx), [idx, setHighlighted])
 
   if (hours !== 0) {
     return (
       <div className={hourClass} onClick={setHighlight} onMouseEnter={setHighlight}>
-        <span className="hour">{isPM ? (hours - 12 === 0 ? 12 : hours - 12) : hours}</span>
+        <span className="hour">{isPM ? (hours - 12 === 0 ? 12 : hours - 12) : hours}{hasHalfDifference && <span className="minutes text-xxxs align-middle">:&nbsp;30</span>}</span>
         <span className="time text-xxs">{isPM ? 'pm' : 'am'}</span>
       </div>
     )
@@ -62,4 +63,4 @@ const Hour: React.FC<HourProps> = React.memo(({ idx, difference, time, setHighli
   )
 })
 
-export default Hour
+export default memo(Hour)
