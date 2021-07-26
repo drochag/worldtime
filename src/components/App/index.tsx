@@ -1,22 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
 
 import Search from 'components/Search'
 import Suggestions from 'components/Suggestions'
-import { getHello } from 'components/api'
+import useInterval from 'utils/useInterval'
 
 const App: React.FC = () => {
   const [time, setTime] = useState(new Date())
-  useEffect(() => {
-    getHello()
-    .then(res => console.log(res))
-    const interval = setInterval(() => {
-      setTime(new Date())
-    }, 1000 * 60)
-    return () => clearInterval(interval)
-  }, [])
+  useInterval(() => {
+    setTime(new Date())
+  }, 1000 * (60 - time.getSeconds()))
   return (
     <>
       <div className="max-w-7xl mx-auto">
