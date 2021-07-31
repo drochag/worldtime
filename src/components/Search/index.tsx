@@ -1,84 +1,87 @@
-import React, { ChangeEvent, useState, useCallback } from 'react'
+import React, { useCallback, useState } from 'react'
 import debounce from 'lodash/debounce'
-import Autosuggest from 'react-autosuggest'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import Async from 'react-select/async';
+import tailwind from '../../../tailwind.config'
 
 import { getPlaces } from '../api'
 import { SearchProps, Suggestion } from 'types'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
-const inputClassNames = `
-  bg-sand appearance-none border-2 border-sand rounded
-  w-full
-  py-2 px-4
-  rounded-full
-  text-gray-700 leading-tight
-  focus:outline-none focus:bg-white focus:border-apricot
-`
+const customStyles = {
+  container: provided => ({
+    ...provided,
+    display: 'inline-block',
+    maxWidth: '628px',
+    width: '100%',
+  }),
+  control: provided => ({
+    ...provided,
+    appearance: 'none',
+    margin: 0,
+    borderRadius: 999,
+  }),
+  dropdownIndicator: () => ({
+    display: 'none'
+  }),
+  indicatorSeparator: () => ({
+    display: 'none'
+  }),
+  menu: provided => ({
+    ...provided,
+    background: 'white',
+    borderRadius: '10px',
+    zIndex: 999
+  }),
+}
 
-const renderSuggestion = suggestion => <div>{suggestion.formatted_address}</div>
-const getSuggestionValue = (s: string) => s
+const getOptionLabel = suggestion => suggestion.formatted_address
 
-const Search: React.FC<SearchProps> = ({
-  onSelect,
-  loading: loadingParent,
-  onSuggestionsShown,
-}) => {
-  const [suggestions, setSuggestions] = useState<Suggestion[]>([])
-  const [value, setValue] = useState('')
-  const [loading, setLoading] = useState(false)
-
-  const getSuggestions = useCallback(
-    debounce((search: string) => {
+const Search: React.FC<SearchProps> = ({ onSelect, loading }) => {
+  const loadOptions = useCallback(
+    debounce((search: string, callback: (suggestions: Suggestion[]) => any) => {
       if (search.length < 3) {
         return
       }
 
-      setLoading(true)
       getPlaces(search).then(data => {
-        console.log(data)
         if (!data) {
           return
         }
-        setSuggestions(data)
-        onSuggestionsShown(!data.length)
-        setLoading(false)
+        callback(data)
       })
     }, 750),
     []
   )
 
-  const onInputChange = (event: ChangeEvent<HTMLInputElement>, { newValue }) => setValue(newValue)
-  const onSuggestionsFetchRequested = ({ value: search }) => getSuggestions(search)
-  const onSuggestionsClearRequested = () => {
-    setSuggestions([])
-    onSuggestionsShown(false)
-  }
-  const onSuggestionSelected = (event: ChangeEvent<HTMLInputElement>, { suggestion }) => {
-    onSelect(suggestion)
-    setValue('')
-  }
-
-  const inputProps = {
-    placeholder: 'Find place by typing',
-    value,
-    className: inputClassNames,
-    onChange: onInputChange,
-  }
+  const onChange = useCallback(item => {
+    onSelect(item)
+  }, [onSelect])
 
   return (
     <>
-      <Autosuggest
-        getSuggestionValue={getSuggestionValue}
-        suggestions={suggestions}
-        onSuggestionSelected={onSuggestionSelected}
-        onSuggestionsFetchRequested={onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={onSuggestionsClearRequested}
-        renderSuggestion={renderSuggestion}
-        value={value}
-        inputProps={inputProps}
+      <Async
+        placeholder="Find place by typing"
+        onChange={onChange}
+        value={null}
+        loadOptions={loadOptions}
+        getOptionLabel={getOptionLabel}
+        styles={customStyles}
+        theme={theme => ({
+          ...theme,
+          spacing: {
+            ...theme.spacing,
+            baseUnit: 6,
+          },
+          colors: {
+            primary: '#ebf8ff',
+            primary25: '#bee3f8',
+            primary50: '#90cdf4',
+            primary75: '#63b3ed',
+          }
+        })}
       />
-      {(loading || loadingParent) && (
+      {loading && (
         <div className="inline-block mt-2 md:ml-3 md:mt-0 text-gray-600">
           <FontAwesomeIcon icon={faSpinner} className="fa-spin mr-3" /> Loading ...
         </div>

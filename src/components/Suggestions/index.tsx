@@ -57,16 +57,11 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
     ls('suggestions', selectedSuggestions)
   }
 
-  onSuggestionsShown = (isEmpty: boolean) => {
-    this.setState({ noSuggestions: isEmpty })
-  }
-
   render() {
     return (
       <div className="w-full p-3 bg-white mt-10 rounded-lg shadow-xl">
         {this.props.children({
           onSelect: this.selectSuggestion,
-          onSuggestionsShown: this.onSuggestionsShown,
           loading: this.state.loading,
         })}
         {this.state.selectedSuggestions.length === 0 && (
@@ -78,11 +73,6 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
           <div className="mt-4 text-center text-apricot font-medium">
             <span className="md:hidden mr-2">Tap a time to move the ruler.</span>
             You can tap the circles to set that location as your home.
-          </div>
-        )}
-        {this.state.noSuggestions && (
-          <div className="mt-4 text-center text-apricot font-medium">
-            Nothing found with that name, try again.
           </div>
         )}
         {this.state.existingSuggestion && (

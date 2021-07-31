@@ -9,9 +9,11 @@ import useInterval from 'utils/useInterval'
 
 const App: React.FC = () => {
   const [time, setTime] = useState(new Date())
+
   useInterval(() => {
     setTime(new Date())
   }, 1000 * (60 - time.getSeconds()))
+
   return (
     <>
       <div className="max-w-7xl mx-auto">

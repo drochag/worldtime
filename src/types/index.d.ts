@@ -27,7 +27,6 @@ export interface SuggestionsState {
 
 export interface SearchProps {
   onSelect: (suggestion: Suggestion) => void
-  onSuggestionsShown: (isEmpty: boolean) => void
   loading: boolean
 }
 

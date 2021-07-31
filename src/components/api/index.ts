@@ -23,7 +23,7 @@ export const getPlaces = (() => {
   const cache = {}
   return (address: string): Promise<void | Suggestion[]> => {
     if (cache[address]) {
-      return cache[address]
+      return Promise.resolve(cache[address])
     }
 
     return apiInstance
@@ -46,7 +46,7 @@ export const getExtendedSuggestion = (() => {
     const location = `${lat},${lng}`
 
     if (cache[location]) {
-      return cache[location]
+      return Promise.resolve(cache[location])
     }
 
     return apiInstance
