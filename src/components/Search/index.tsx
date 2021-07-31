@@ -1,7 +1,6 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 import debounce from 'lodash/debounce'
 import Async from 'react-select/async';
-import tailwind from '../../../tailwind.config'
 
 import { getPlaces } from '../api'
 import { SearchProps, Suggestion } from 'types'
