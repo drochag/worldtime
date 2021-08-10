@@ -1,8 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import ReactGA from 'react-ga'
 import App from './components/App'
 import * as serviceWorker from './serviceWorker'
 import './tailwind.generated.css'
+
+ReactGA.initialize(process.env.REACT_APP_ANALYTICS ?? '')
+ReactGA.pageview('/')
 
 ReactDOM.render(
   <React.StrictMode>

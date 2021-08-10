@@ -9,7 +9,7 @@ const apiInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
     'Access-Control-Allow-Origin': '*',
-  }
+  },
 })
 
 apiInstance.interceptors.request.use(config => ({
