@@ -21,7 +21,7 @@ const App: React.FC = () => {
           WorldtimeLite
         </h1>
       </div>
-      <div className="max-w-7xl w-full mx-auto flex-grow">
+      <div className="max-w-7xl w-full mx-auto">
         <Suggestions time={time}>{props => <Search {...props} />}</Suggestions>
       </div>
       <footer className="text-white pb-4 mt-4 text-center w-full">
