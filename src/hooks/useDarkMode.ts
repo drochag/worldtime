@@ -10,7 +10,7 @@ export default function useDarkMode(): [string, React.Dispatch<React.SetStateAct
       storageTheme === 'dark' ||
       (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)
     ) {
-      setTheme(storageTheme)
+      setTheme('dark')
       root.classList.add('dark')
       root.classList.remove('light')
     } else {

@@ -8,11 +8,11 @@ const getHourClasses = (hours: number, idx: number): string => {
   let borderClass = ''
 
   if (hours < 6 || hours > 20) {
-    timeClass = 'bg-blue-900 dark:bg-purple-900 text-white'
+    timeClass = 'bg-blue-900 duration-300 transition-colors ease-linear dark:bg-purple-900 text-white'
   } else if (hours < 8 || hours > 17) {
-    timeClass = 'bg-blue-200 dark:bg-purple-200'
+    timeClass = 'bg-blue-200 duration-300 transition-colors ease-linear dark:bg-purple-200'
   } else {
-    timeClass = 'bg-gray-200 dark:bg-purple-100'
+    timeClass = 'bg-gray-200 duration-300 transition-colors ease-linear dark:bg-purple-100'
   }
 
   if (idx === 0 || hours === 0) {
@@ -52,7 +52,7 @@ const Hour: React.FC<HourProps> = React.memo(({ idx, difference, time, setHighli
   return (
     <div className={hourClass} onClick={setHighlight} onMouseEnter={setHighlight}>
       <span
-        className="day text-xxs mt-1 absolute mb-1 text-black dark:text-white"
+        className="day text-xxs mt-1 absolute mb-1 text-black duration-300 transition-colors ease-linear dark:text-white"
         style={{ top: '-1.5rem' }}
       >
         {new Intl.DateTimeFormat('en-US', {

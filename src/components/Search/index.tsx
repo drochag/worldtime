@@ -64,6 +64,24 @@ const Search: React.FC<SearchProps> = ({ onSelect, loading }) => {
     [onSelect]
   )
 
+  const theme = useCallback(
+    // tslint:disable-next-line: no-shadowed-variable
+    theme => ({
+      ...theme,
+      spacing: {
+        ...theme.spacing,
+        baseUnit: 6,
+      },
+      colors: {
+        primary: !isDarkMode ? '#faf5ff' : '#ebf8ff',
+        primary25: !isDarkMode ? '#e9d8fd' : '#bee3f8',
+        primary50: !isDarkMode ? '#d6bcfa' : '#90cdf4',
+        primary75: !isDarkMode ? '#b794f4' : '#63b3ed',
+      },
+    }),
+    [isDarkMode]
+  )
+
   return (
     <>
       <Async
@@ -73,19 +91,7 @@ const Search: React.FC<SearchProps> = ({ onSelect, loading }) => {
         loadOptions={loadOptions}
         getOptionLabel={getOptionLabel}
         styles={customStyles(!isDarkMode)}
-        theme={theme => ({
-          ...theme,
-          spacing: {
-            ...theme.spacing,
-            baseUnit: 6,
-          },
-          colors: {
-            primary: isDarkMode ? '#faf5ff' : '#ebf8ff',
-            primary25: isDarkMode ? '#e9d8fd' : '#bee3f8',
-            primary50: isDarkMode ? '#d6bcfa' : '#90cdf4',
-            primary75: isDarkMode ? '#b794f4' : '#63b3ed',
-          },
-        })}
+        theme={theme}
       />
       {loading && (
         <div className="inline-block mt-2 md:ml-3 md:mt-0 text-gray-600">

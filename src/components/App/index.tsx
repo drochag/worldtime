@@ -19,10 +19,10 @@ const App: React.FC = () => {
   return (
     <>
       <div className="max-w-7xl mx-auto">
-        <h1 className="text-4xl md:text-6xl text-secondary dark:text-darkSecondary leading-tight mt-12 text-center">
+        <h1 className="text-4xl md:text-6xl text-secondary duration-300 transition-colors ease-linear dark:text-darkSecondary leading-tight mt-12 text-center">
           WorldtimeLite
           <button
-            className="ml-3 align-middle border-2 rounded-full p-2 border-white dark:border-darkSecondary"
+            className="ml-3 align-middle border-2 rounded-full p-2 border-white duration-300 transition-colors ease-linear dark:border-darkSecondary"
             onClick={() => setTheme(colorTheme)}
           >
             {colorTheme === 'light' ? (
@@ -54,7 +54,7 @@ const App: React.FC = () => {
       <div className="max-w-7xl w-full mx-auto">
         <Suggestions time={time}>{props => <Search {...props} />}</Suggestions>
       </div>
-      <footer className="text-secondary dark:text-darkSecondary pb-4 mt-4 text-center w-full">
+      <footer className="text-secondary duration-300 transition-colors ease-linear dark:text-darkSecondary pb-4 mt-4 text-center w-full">
         Made with <FontAwesomeIcon icon={faHeart} /> by&nbsp;
         <a
           className="underline"
