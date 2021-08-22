@@ -4,10 +4,10 @@ import Async from 'react-select/async';
 
 import { getPlaces } from '../api'
 import { SearchProps, Suggestion } from 'types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
-const customStyles = {
+const customStyles = isDarkMode => ({
   container: provided => ({
     ...provided,
     display: 'inline-block',
@@ -19,24 +19,28 @@ const customStyles = {
     appearance: 'none',
     margin: 0,
     borderRadius: 999,
+    background: isDarkMode ? 'rgb(250, 245, 255)' : 'white',
   }),
   dropdownIndicator: () => ({
-    display: 'none'
+    display: 'none',
   }),
   indicatorSeparator: () => ({
-    display: 'none'
+    display: 'none',
   }),
   menu: provided => ({
     ...provided,
-    background: 'white',
+    background: isDarkMode ? 'rgb(250, 245, 255)' : 'white',
     borderRadius: '10px',
-    zIndex: 999
+    zIndex: 999,
   }),
-}
+})
 
 const getOptionLabel = suggestion => suggestion.formatted_address
 
 const Search: React.FC<SearchProps> = ({ onSelect, loading }) => {
+  const root = window.document.documentElement
+  const isDarkMode = root.classList.contains('dark')
+
   const loadOptions = useCallback(
     debounce((search: string, callback: (suggestions: Suggestion[]) => any) => {
       if (search.length < 3) {
@@ -53,9 +57,12 @@ const Search: React.FC<SearchProps> = ({ onSelect, loading }) => {
     []
   )
 
-  const onChange = useCallback(item => {
-    onSelect(item)
-  }, [onSelect])
+  const onChange = useCallback(
+    item => {
+      onSelect(item)
+    },
+    [onSelect]
+  )
 
   return (
     <>
@@ -65,7 +72,7 @@ const Search: React.FC<SearchProps> = ({ onSelect, loading }) => {
         value={null}
         loadOptions={loadOptions}
         getOptionLabel={getOptionLabel}
-        styles={customStyles}
+        styles={customStyles(!isDarkMode)}
         theme={theme => ({
           ...theme,
           spacing: {
@@ -73,11 +80,11 @@ const Search: React.FC<SearchProps> = ({ onSelect, loading }) => {
             baseUnit: 6,
           },
           colors: {
-            primary: '#ebf8ff',
-            primary25: '#bee3f8',
-            primary50: '#90cdf4',
-            primary75: '#63b3ed',
-          }
+            primary: isDarkMode ? '#faf5ff' : '#ebf8ff',
+            primary25: isDarkMode ? '#e9d8fd' : '#bee3f8',
+            primary50: isDarkMode ? '#d6bcfa' : '#90cdf4',
+            primary75: isDarkMode ? '#b794f4' : '#63b3ed',
+          },
         })}
       />
       {loading && (

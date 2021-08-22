@@ -23,11 +23,11 @@ const TimesList: React.FC<TimesListProps> = React.memo(({ selectedSuggestions, t
   return (
     <div className="mt-4 pr-5 relative" onMouseLeave={removeHighlight}>
       <div
-        className="absolute w-8 bg-apricot bg-opacity-20 rounded-lg"
+        className="absolute w-8 bg-primary dark:bg-darkPrimary bg-opacity-20 rounded-lg"
         style={getStyles({ suggestions: selectedSuggestions.length })}
       />
       <div
-        className="absolute w-8 border-apricot border-opacity-50 border-2 rounded-lg"
+        className="absolute w-8 border-primary dark:border-purple-200 dark:bg-transparent border-opacity-50 border-2 rounded-lg"
         style={getStyles({ suggestions: selectedSuggestions.length, highlighted })}
       />
       {selectedSuggestions.map((suggestion, idx) => (

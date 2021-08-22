@@ -8,11 +8,11 @@ const getHourClasses = (hours: number, idx: number): string => {
   let borderClass = ''
 
   if (hours < 6 || hours > 20) {
-    timeClass = 'bg-blue-900 text-white'
+    timeClass = 'bg-blue-900 dark:bg-purple-900 text-white'
   } else if (hours < 8 || hours > 17) {
-    timeClass = 'bg-blue-200 '
+    timeClass = 'bg-blue-200 dark:bg-purple-200'
   } else {
-    timeClass = 'bg-gray-200 '
+    timeClass = 'bg-gray-200 dark:bg-purple-100'
   }
 
   if (idx === 0 || hours === 0) {
@@ -40,7 +40,10 @@ const Hour: React.FC<HourProps> = React.memo(({ idx, difference, time, setHighli
   if (hours !== 0) {
     return (
       <div className={hourClass} onClick={setHighlight} onMouseEnter={setHighlight}>
-        <span className="hour">{isPM ? (hours - 12 === 0 ? 12 : hours - 12) : hours}{hasHalfDifference && <span className="minutes text-xxxs align-middle">:&nbsp;30</span>}</span>
+        <span className="hour">
+          {isPM ? (hours - 12 === 0 ? 12 : hours - 12) : hours}
+          {hasHalfDifference && <span className="minutes text-xxxs align-middle">:&nbsp;30</span>}
+        </span>
         <span className="time text-xxs">{isPM ? 'pm' : 'am'}</span>
       </div>
     )
@@ -48,7 +51,10 @@ const Hour: React.FC<HourProps> = React.memo(({ idx, difference, time, setHighli
 
   return (
     <div className={hourClass} onClick={setHighlight} onMouseEnter={setHighlight}>
-      <span className="day text-xxs mt-1 absolute mb-1 text-black" style={{ top: '-1.5rem' }}>
+      <span
+        className="day text-xxs mt-1 absolute mb-1 text-black dark:text-white"
+        style={{ top: '-1.5rem' }}
+      >
         {new Intl.DateTimeFormat('en-US', {
           weekday: 'short',
         }).format(calculatedTime)}

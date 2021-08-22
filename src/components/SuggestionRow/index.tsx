@@ -14,7 +14,7 @@ const rowClassNames = `
 
 const circleClassNames = `
   circle cursor-pointer
-  w-8 rounded-full bg-sand flex
+  w-8 rounded-full bg-secondary flex
   h-8 items-center justify-center
   md:mr-2
   text-sm

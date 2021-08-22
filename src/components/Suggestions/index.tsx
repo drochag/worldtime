@@ -59,24 +59,24 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
 
   render() {
     return (
-      <div className="w-full p-3 bg-white mt-10 rounded-lg shadow-xl">
+      <div className="w-full p-3 bg-white dark:bg-darkSecondary mt-10 rounded-lg shadow-xl">
         {this.props.children({
           onSelect: this.selectSuggestion,
           loading: this.state.loading,
         })}
         {this.state.selectedSuggestions.length === 0 && (
-          <div className="mt-4 text-center text-apricot font-medium">
+          <div className="mt-4 text-center text-primary dark:text-darkPrimary font-medium">
             Search a place to show its time.
           </div>
         )}
         {this.state.selectedSuggestions.length !== 0 && (
-          <div className="mt-4 text-center text-apricot font-medium">
+          <div className="mt-4 text-center text-primary dark:text-darkPrimary font-medium">
             <span className="md:hidden mr-2">Tap a time to move the ruler.</span>
             You can tap the circles to set that location as your home.
           </div>
         )}
         {this.state.existingSuggestion && (
-          <div className="mt-4 text-center text-apricot font-medium">
+          <div className="mt-4 text-center text-primary dark:text-darkPrimary font-medium">
             You've already added that location
           </div>
         )}

@@ -3,7 +3,8 @@
   "rulesDirectory": ["tslint-plugin-prettier"],
   "rules": {
     "prettier": true,
-    "interface-name": false
+    "interface-name": false,
+    "jsx-no-lambda": false
   },
   "linterOptions": {
     "exclude": ["src/serviceWorker.ts"]

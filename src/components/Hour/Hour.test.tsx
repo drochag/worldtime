@@ -100,7 +100,7 @@ describe('Hour', () => {
     )
 
     expect(wrapper.hasClass('bg-blue-900')).toBeTruthy()
-    expect(wrapper.hasClass('text-white')).toBeTruthy()
+    expect(wrapper.hasClass('text-secondary')).toBeTruthy()
   })
 
   it("should be ligher if it's on the afternoon or morning", () => {
