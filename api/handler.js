@@ -26,46 +26,45 @@ const getAbbreviation = timezone =>
 
 const headers = {
   'Access-Control-Allow-Origin': '*',
-  'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin'
+  'Access-Control-Allow-Headers':
+    'Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Origin',
 }
 
-module.exports.getPlaces = async (event) => {
+module.exports.getPlaces = async event => {
   try {
-    const response = await googleMapsInstance
-      .get('/geocode/json', {
-        params: {
-          address: JSON.parse(event.body).address,
-        },
-      })
-    
-      const { data } = response
-      return {
-          headers,
-          statusCode: 200,
-          body: JSON.stringify(data.results)
-      }
+    const response = await googleMapsInstance.get('/geocode/json', {
+      params: {
+        address: JSON.parse(event.body).address,
+      },
+    })
+
+    const { data } = response
+    return {
+      headers,
+      statusCode: 200,
+      body: JSON.stringify(data.results),
+    }
   } catch (err) {
     console.log(err)
     return {
       headers,
       statusCode: 400,
-      body: err.message
+      body: err.message,
     }
   }
 }
 
-module.exports.getExtendedSuggestion = async (event) => {
+module.exports.getExtendedSuggestion = async event => {
   const { lat, lng } = JSON.parse(event.body)
   const location = `${lat},${lng}`
   try {
-    const { data: timezone } = await googleMapsInstance
-      .get('/timezone/json', {
-        params: {
-          location,
-          timestamp: Math.floor(Date.now() / 1000),
-        },
-      })
-      
+    const { data: timezone } = await googleMapsInstance.get('/timezone/json', {
+      params: {
+        location,
+        timestamp: Math.floor(Date.now() / 1000),
+      },
+    })
+
     const abbreviation = await getAbbreviation(timezone.timeZoneId)
     return {
       headers,
@@ -73,29 +72,29 @@ module.exports.getExtendedSuggestion = async (event) => {
       body: JSON.stringify({
         timezone,
         abbreviation,
-      })
+      }),
     }
   } catch (err) {
     console.log(err)
     return {
       headers,
       statusCode: 400,
-      body: err.message
+      body: err.message,
     }
   }
 }
 
-module.exports.hello = async (event) => {
+module.exports.hello = async event => {
   return {
     statusCode: 200,
     headers,
     body: JSON.stringify(
       {
-        message: "Go Serverless v2.0! Your function executed successfully!",
+        message: 'Go Serverless v2.0! Your function executed successfully!',
         input: event,
       },
       null,
       2
     ),
-  };
-};
+  }
+}
