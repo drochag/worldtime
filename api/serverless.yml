@@ -42,7 +42,7 @@ functions:
               - Access-Control-Allow-Origin
   getExtendedSuggestion:
     handler: handler.getExtendedSuggestion
-    timeout: 10
+    timeout: 14
     events:
       - http:
           path: /get-extended-suggestion
