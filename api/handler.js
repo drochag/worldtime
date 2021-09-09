@@ -21,9 +21,12 @@ googleMapsInstance.interceptors.request.use(config => ({
 const getAbbreviationAndLanguage = (timezone, country) => {
   const language = `${data.countries[country]}-${country.toLowerCase()}`
   var abbreviation = new Date()
-    .toLocaleTimeString(language, { timeZone: timezone, timeZoneName: 'short' })
+    .toLocaleTimeString('en-us', {
+      timeZone: timezone,
+      timeZoneName: 'short',
+      hour12: true,
+    })
     .split(' ')[2]
-
   return { abbreviation, language }
 }
 
