@@ -26,7 +26,7 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
 
   selectSuggestion = (suggestion: Suggestion) => {
     this.setState({ loading: true })
-    getExtendedSuggestion(suggestion).then((extendedSuggestion: void | ExtendedSuggestion) => {
+    getExtendedSuggestion(suggestion).then((extendedSuggestion: void | ExtendedSuggestion) => {
       if (!extendedSuggestion) {
         return
       }

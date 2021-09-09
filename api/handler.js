@@ -1,11 +1,8 @@
 const axios = require('axios')
+const data = require('./data')
 
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
-
-const worldTimeInstance = axios.create({
-  baseURL: 'https://worldtimeapi.org/api/timezone/',
-})
 
 const googleMapsInstance = axios.create({
   baseURL: 'https://maps.googleapis.com/maps/api/',
@@ -21,8 +18,14 @@ googleMapsInstance.interceptors.request.use(config => ({
   },
 }))
 
-const getAbbreviation = timezone =>
-  worldTimeInstance(`/${timezone}`).then(res => res.data.abbreviation)
+const getAbbreviationAndLanguage = (timezone, country) => {
+  const language = `${data.countries[country]}-${country.toLowerCase()}`
+  var abbreviation = new Date()
+    .toLocaleTimeString(language, { timeZone: timezone, timeZoneName: 'short' })
+    .split(' ')[2]
+
+  return { abbreviation, language }
+}
 
 const headers = {
   'Access-Control-Allow-Origin': '*',
@@ -39,6 +42,7 @@ module.exports.getPlaces = async event => {
     })
 
     const { data } = response
+
     return {
       headers,
       statusCode: 200,
@@ -55,7 +59,7 @@ module.exports.getPlaces = async event => {
 }
 
 module.exports.getExtendedSuggestion = async event => {
-  const { lat, lng } = JSON.parse(event.body)
+  const { lat, lng, country } = JSON.parse(event.body)
   const location = `${lat},${lng}`
   try {
     const { data: timezone } = await googleMapsInstance.get('/timezone/json', {
@@ -65,13 +69,18 @@ module.exports.getExtendedSuggestion = async event => {
       },
     })
 
-    const abbreviation = await getAbbreviation(timezone.timeZoneId)
+    const { abbreviation, language } = await getAbbreviationAndLanguage(
+      timezone.timeZoneId,
+      country
+    )
+
     return {
       headers,
       statusCode: 200,
       body: JSON.stringify({
         timezone,
         abbreviation,
+        language,
       }),
     }
   } catch (err) {

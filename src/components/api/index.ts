@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios'
 import { Suggestion, ExtendedSuggestion, ServerSuggestion } from 'types'
+import getCountry from 'utils/getCountry'
 
 const CancelToken = axios.CancelToken
 const source = CancelToken.source()
@@ -42,7 +43,8 @@ export const getPlaces = (() => {
 export const getExtendedSuggestion = (() => {
   const cache = {}
   return (suggestion: Suggestion): Promise<void | ExtendedSuggestion> => {
-    const { lat, lng } = suggestion.geometry.location
+    const { lat, lng } = suggestion.geometry.location
+    const country = getCountry(suggestion)
     const location = `${lat},${lng}`
 
     if (cache[location]) {
@@ -50,14 +52,14 @@ export const getExtendedSuggestion = (() => {
     }
 
     return apiInstance
-      .post('/get-extended-suggestion', { lat, lng })
+      .post('/get-extended-suggestion', { lat, lng, country })
       .then(res => res.data as ServerSuggestion)
-      .then(({ abbreviation, timezone }) =>
-        ({
-          ...suggestion,
-          abbreviation,
-          timezone,
-        } as ExtendedSuggestion)
+      .then(
+        extendedSuggestion =>
+          ({
+            ...suggestion,
+            ...extendedSuggestion,
+          } as ExtendedSuggestion)
       )
       .then(extendedSuggestion => {
         cache[location] = extendedSuggestion

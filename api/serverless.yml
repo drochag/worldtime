@@ -42,7 +42,6 @@ functions:
               - Access-Control-Allow-Origin
   getExtendedSuggestion:
     handler: handler.getExtendedSuggestion
-    timeout: 14
     events:
       - http:
           path: /get-extended-suggestion
@@ -55,3 +54,6 @@ functions:
               - Accept
               - Origin
               - Access-Control-Allow-Origin
+
+plugins:
+  - serverless-offline

@@ -14,6 +14,7 @@ export interface Timezone {
 export interface ServerSuggestion {
   timezone: Timezone
   abbreviation: string
+  language: string
 }
 
 export type ExtendedSuggestion = ServerSuggestion & Suggestion
@@ -75,7 +76,7 @@ export interface ExtendedSuggestion extends Suggestion {
 
 export interface CityProps {
   name: string
-  country: string
+  country?: string
   time: date
   difference: number
   abbreviation: string
@@ -85,9 +86,9 @@ export interface SuggestionProps {
   onRemove: (idx: number) => void
   setHome: (idx: number) => void
   suggestion: ExtendedSuggestion
-  homeTime: date
   idx: number
   time: date
+  country?: string
 }
 
 export interface SuggestionsListProps extends Pick<SuggestionProps, 'onRemove' | 'setHome'> {

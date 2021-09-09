@@ -37,24 +37,29 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
   suggestion,
   onRemove,
   idx,
-  homeTime,
   setHome,
   time,
+  country,
 }) => {
   const onDelete = useCallback(() => onRemove(idx), [idx, onRemove])
   const onClickDifference = useCallback(() => setHome(idx), [idx, setHome])
   const suggestionTime = new Date(
-    new Date(time).toLocaleString('en-US', { timeZone: suggestion.timezone.timeZoneId })
+    new Date(time).toLocaleString(suggestion.language, {
+      timeZone: suggestion.timezone.timeZoneId,
+      hour12: false,
+    })
   )
 
-  let difference = suggestionTime.getTime() - homeTime.getTime()
+  let difference = suggestionTime.getTime() - time.getTime()
 
   difference /= 60 * 60 * 1000
+  difference = Math.round(difference)
+
   return (
     <div className={rowClassNames} key={suggestion.formatted_address}>
       <div className="flex items-center text-center md:text-left align-center flex-col md:flex-row">
         <div className="md:w-10 w-6 text-sm md:text-lg cursor-pointer">
-        <FontAwesomeIcon icon={faTrash} className="md:mr-3 mb-2 md:mb-0" onClick={onDelete} />
+          <FontAwesomeIcon icon={faTrash} className="md:mr-3 mb-2 md:mb-0" onClick={onDelete} />
         </div>
         <div className={circleClassNames} onClick={onClickDifference}>
           {idx === 0 && <FontAwesomeIcon icon={faHome} />}
@@ -68,11 +73,7 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
       </div>
       <City
         difference={difference}
-        country={
-          suggestion.address_components.find(component =>
-            component.types.find(type => type === 'country')
-          )?.short_name || ''
-        }
+        country={country}
         time={time}
         name={getName(suggestion.address_components, suggestion.types)}
         abbreviation={suggestion.abbreviation}
