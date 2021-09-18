@@ -44,14 +44,17 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
   const onDelete = useCallback(() => onRemove(idx), [idx, onRemove])
   const onClickDifference = useCallback(() => setHome(idx), [idx, setHome])
   const suggestionTime = new Date(
-    new Date(time).toLocaleString(suggestion.language, {
+    new Date(time).toLocaleString('en-us', {
       timeZone: suggestion.timezone.timeZoneId,
       hour12: false,
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
     })
   )
 
   let difference = suggestionTime.getTime() - time.getTime()
-
   difference /= 60 * 60 * 1000
   difference = Math.round(difference)
 

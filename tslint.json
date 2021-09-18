@@ -4,7 +4,8 @@
   "rules": {
     "prettier": true,
     "interface-name": false,
-    "jsx-no-lambda": false
+    "jsx-no-lambda": false,
+    "no-angle-bracket-type-assertion": false
   },
   "linterOptions": {
     "exclude": ["src/serviceWorker.ts"]

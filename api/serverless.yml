@@ -12,20 +12,6 @@ provider:
     GOOGLE_MAPS_API_KEY: ${param:GOOGLE_MAPS_API_KEY}
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          path: /
-          method: get
-          cors:
-            origin: '*'
-            headers:
-              - Content-Type
-              - X-Requested-With
-              - Accept
-              - Origin
-              - Access-Control-Allow-Origin
   getPlaces:
     handler: handler.getPlaces
     events:

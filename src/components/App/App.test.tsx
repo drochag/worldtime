@@ -11,7 +11,7 @@ describe('App', () => {
     const app = shallow(<App />)
     const title = (
       <h1 className="text-4xl md:text-6xl text-secondary duration-300 transition-colors ease-linear dark:text-darkSecondary leading-tight mt-12 text-center">
-        WorldtimeLite
+        Worldtime Clock
       </h1>
     )
     expect(app.contains(title)).toEqual(true)

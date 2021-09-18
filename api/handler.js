@@ -22,6 +22,7 @@ const getAbbreviationAndLanguage = (timezone, country) => {
   const language = `${data.countries[country]}-${country.toLowerCase()}`
   var abbreviation = new Date()
     .toLocaleTimeString('en-us', {
+      // TODO: use language
       timeZone: timezone,
       timeZoneName: 'short',
       hour12: true,
@@ -72,10 +73,7 @@ module.exports.getExtendedSuggestion = async event => {
       },
     })
 
-    const { abbreviation, language } = await getAbbreviationAndLanguage(
-      timezone.timeZoneId,
-      country
-    )
+    const { abbreviation, language } = getAbbreviationAndLanguage(timezone.timeZoneId, country)
 
     return {
       headers,
@@ -93,20 +91,5 @@ module.exports.getExtendedSuggestion = async event => {
       statusCode: 400,
       body: err.message,
     }
-  }
-}
-
-module.exports.hello = async event => {
-  return {
-    statusCode: 200,
-    headers,
-    body: JSON.stringify(
-      {
-        message: 'Go Serverless v2.0! Your function executed successfully!',
-        input: event,
-      },
-      null,
-      2
-    ),
   }
 }

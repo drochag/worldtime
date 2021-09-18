@@ -1,5 +1,5 @@
 <h1 align="center">
-  World time lite
+  World time clock
 </h1>
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It's a lightweight app for checking different timezones.
@@ -17,7 +17,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
     Navigate into your new site’s directory and start it up.
 
     Configure and deploy the serverless api
-    
+
     ```shell
       cd api
       serverless deploy
