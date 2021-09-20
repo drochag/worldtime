@@ -78,7 +78,6 @@ export interface CityProps {
   name: string
   country?: string
   time: date
-  difference: number
   abbreviation: string
 }
 

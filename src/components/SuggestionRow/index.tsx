@@ -51,6 +51,8 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
       year: 'numeric',
       month: 'long',
       day: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
     })
   )
 
@@ -75,9 +77,8 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
         </div>
       </div>
       <City
-        difference={difference}
         country={country}
-        time={time}
+        time={suggestionTime}
         name={getName(suggestion.address_components, suggestion.types)}
         abbreviation={suggestion.abbreviation}
       />

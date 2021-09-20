@@ -23,9 +23,9 @@ const withDarkMode = <P extends object>(WrappedComponent: React.ComponentType<P>
     }
 
     componentDidMount() {
-      const { matchMedia, theme } = this.state
-
-      this.removeThemeClassNames()
+      const { matchMedia } = this.state
+      const theme = (localStorage.getItem('theme') as Theme) || 'auto'
+      this.setActiveTheme(theme)
       localStorage.setItem('theme', theme)
 
       matchMedia.addEventListener('change', this.matchMedia)
