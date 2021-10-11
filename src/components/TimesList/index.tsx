@@ -35,9 +35,7 @@ const TimesList: React.FC<TimesListProps> = React.memo(({ selectedSuggestions, t
           key={suggestion.formatted_address}
           time={time}
           setHighlighted={setHighlighted}
-          difference={
-            (suggestion.timezone.rawOffset - selectedSuggestions[0].timezone.rawOffset) / 60 / 60
-          }
+          difference={suggestion.difference}
         />
       ))}
     </div>

@@ -58,6 +58,13 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
   }
 
   render() {
+    const withDifference = this.state.selectedSuggestions.map(suggestion => ({
+      ...suggestion,
+      difference:
+        (suggestion.timezone.rawOffset - this.state.selectedSuggestions[0].timezone.rawOffset) /
+        60 /
+        60,
+    }))
     return (
       <div className="w-full p-3 bg-white duration-300 transition-colors ease-linear dark:bg-darkSecondary mt-10 rounded-lg shadow-xl">
         {this.props.children({
@@ -84,14 +91,11 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
           <div className="overflow-x-auto flex relative xxl:justify-center">
             <SuggestionsList
               time={this.props.time}
-              selectedSuggestions={this.state.selectedSuggestions}
+              selectedSuggestions={withDifference}
               onRemove={this.removeSuggestion}
               setHome={this.setHome}
             />
-            <TimesList
-              time={this.props.time}
-              selectedSuggestions={this.state.selectedSuggestions}
-            />
+            <TimesList time={this.props.time} selectedSuggestions={withDifference} />
           </div>
         )}
       </div>

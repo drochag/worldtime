@@ -18,6 +18,9 @@ export interface ServerSuggestion {
 }
 
 export type ExtendedSuggestion = ServerSuggestion & Suggestion
+export type ExtendedSuggestionWithDifference = ExtendedSuggestion & {
+  difference: number
+}
 
 export interface SuggestionsState {
   selectedSuggestions: ExtendedSuggestion[]
@@ -86,12 +89,13 @@ export interface SuggestionProps {
   setHome: (idx: number) => void
   suggestion: ExtendedSuggestion
   idx: number
+  difference: number
   time: date
   country?: string
 }
 
 export interface SuggestionsListProps extends Pick<SuggestionProps, 'onRemove' | 'setHome'> {
-  selectedSuggestions: ExtendedSuggestion[]
+  selectedSuggestions: ExtendedSuggestionWithDifference[]
   time: date
 }
 

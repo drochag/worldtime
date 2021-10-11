@@ -36,6 +36,7 @@ export const getName = (components: AddressComponent[], types: string[]): string
 const SuggestionRow: React.FC<SuggestionProps> = ({
   suggestion,
   onRemove,
+  difference,
   idx,
   setHome,
   time,
@@ -55,10 +56,6 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
       minute: 'numeric',
     })
   )
-
-  let difference = suggestionTime.getTime() - time.getTime()
-  difference /= 60 * 60 * 1000
-  difference = Math.round(difference)
 
   return (
     <div className={rowClassNames} key={suggestion.formatted_address}>

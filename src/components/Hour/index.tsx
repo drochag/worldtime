@@ -8,7 +8,8 @@ const getHourClasses = (hours: number, idx: number): string => {
   let borderClass = ''
 
   if (hours < 6 || hours > 20) {
-    timeClass = 'bg-blue-900 duration-300 transition-colors ease-linear dark:bg-purple-900 text-white'
+    timeClass =
+      'bg-blue-900 duration-300 transition-colors ease-linear dark:bg-purple-900 text-white'
   } else if (hours < 8 || hours > 17) {
     timeClass = 'bg-blue-200 duration-300 transition-colors ease-linear dark:bg-purple-200'
   } else {

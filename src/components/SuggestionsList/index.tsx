@@ -18,6 +18,7 @@ const SuggestionsList: React.FC<SuggestionsListProps> = ({
           onRemove={onRemove}
           setHome={setHome}
           suggestion={suggestion}
+          difference={suggestion.difference}
           time={time}
           country={getCountry(suggestion)}
         />
