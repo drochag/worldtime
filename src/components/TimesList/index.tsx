@@ -30,7 +30,7 @@ const TimesList: React.FC<TimesListProps> = React.memo(({ selectedSuggestions, t
         className="absolute w-8 border-primary dark:border-purple-200 dark:bg-transparent border-opacity-50 border-2 rounded-lg"
         style={getStyles({ suggestions: selectedSuggestions.length, highlighted })}
       />
-      {selectedSuggestions.map((suggestion, idx) => (
+      {selectedSuggestions.map(suggestion => (
         <TimeRow
           key={suggestion.formatted_address}
           time={time}

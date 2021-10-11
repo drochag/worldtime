@@ -92,6 +92,7 @@ export interface SuggestionProps {
   difference: number
   time: date
   country?: string
+  isFirst: boolean
 }
 
 export interface SuggestionsListProps extends Pick<SuggestionProps, 'onRemove' | 'setHome'> {

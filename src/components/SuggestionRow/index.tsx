@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react'
+import React, { memo, useCallback, useEffect, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faHome } from '@fortawesome/free-solid-svg-icons'
 import City from 'components/City'
@@ -9,10 +9,14 @@ const rowClassNames = `
   items-center
   mb-4
   px-2
+  transition-colors duration-300
   h-16
+  rounded-md
 `
 
 const circleClassNames = `
+  hover:bg-gray-400
+  transition-colors duration-300
   circle cursor-pointer
   w-8 rounded-full bg-secondary flex
   h-8 items-center justify-center
@@ -22,6 +26,8 @@ const circleClassNames = `
   md:h-10
   md:text-lg
 `
+
+const recentlyMountedClass = `bg-primary`
 
 export const getName = (components: AddressComponent[], types: string[]): string => {
   const address = components.find(
@@ -41,7 +47,15 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
   setHome,
   time,
   country,
+  isFirst,
 }) => {
+  const [isRecentlyMounted, setRecentlyMounted] = useState(isFirst)
+
+  useEffect(() => {
+    setRecentlyMounted(isFirst)
+    setTimeout(() => setRecentlyMounted(false), 350)
+  }, [isFirst])
+
   const onDelete = useCallback(() => onRemove(idx), [idx, onRemove])
   const onClickDifference = useCallback(() => setHome(idx), [idx, setHome])
   const suggestionTime = new Date(
@@ -58,7 +72,10 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
   )
 
   return (
-    <div className={rowClassNames} key={suggestion.formatted_address}>
+    <div
+      className={rowClassNames + ' ' + (isRecentlyMounted ? recentlyMountedClass : '')}
+      key={suggestion.formatted_address}
+    >
       <div className="flex items-center text-center md:text-left align-center flex-col md:flex-row">
         <div className="md:w-10 w-6 text-sm md:text-lg cursor-pointer">
           <FontAwesomeIcon icon={faTrash} className="md:mr-3 mb-2 md:mb-0" onClick={onDelete} />
