@@ -17,7 +17,10 @@ export interface ServerSuggestion {
   language: string
 }
 
-export type ExtendedSuggestion = ServerSuggestion & Suggestion
+export type ExtendedSuggestion = ServerSuggestion &
+  Suggestion & {
+    recentlyAdded?: boolean
+  }
 export type ExtendedSuggestionWithDifference = ExtendedSuggestion & {
   difference: number
 }
@@ -87,11 +90,9 @@ export interface CityProps {
 export interface SuggestionProps {
   onRemove: (idx: number) => void
   setHome: (idx: number) => void
-  suggestion: ExtendedSuggestion
+  suggestion: ExtendedSuggestionWithDifference
   idx: number
-  difference: number
   time: date
-  country?: string
 }
 
 export interface SuggestionsListProps extends Pick<SuggestionProps, 'onRemove' | 'setHome'> {
