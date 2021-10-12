@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash, faHome } from '@fortawesome/free-solid-svg-icons'
 import City from 'components/City'
 import { AddressComponent, SuggestionProps } from 'types'
+import getCountry from 'utils/getCountry'
 
 const rowClassNames = `
   flex
@@ -12,11 +13,13 @@ const rowClassNames = `
   transition-colors duration-300
   h-16
   rounded-md
+  bg-opacity-50
+  dark:bg-opacity-50
 `
 
 const circleClassNames = `
   hover:bg-gray-400
-  transition-colors duration-300
+  transition-colors duration-600
   circle cursor-pointer
   w-8 rounded-full bg-secondary flex
   h-8 items-center justify-center
@@ -27,7 +30,7 @@ const circleClassNames = `
   md:text-lg
 `
 
-const recentlyMountedClass = `bg-primary`
+const recentlyMountedClass = `bg-primary dark:bg-purple-100`
 
 export const getName = (components: AddressComponent[], types: string[]): string => {
   const address = components.find(
@@ -39,22 +42,13 @@ export const getName = (components: AddressComponent[], types: string[]): string
   return components[0].long_name
 }
 
-const SuggestionRow: React.FC<SuggestionProps> = ({
-  suggestion,
-  onRemove,
-  difference,
-  idx,
-  setHome,
-  time,
-  country,
-  isFirst,
-}) => {
-  const [isRecentlyMounted, setRecentlyMounted] = useState(isFirst)
+const SuggestionRow: React.FC<SuggestionProps> = ({ suggestion, onRemove, idx, setHome, time }) => {
+  const [isRecentlyMounted, setRecentlyMounted] = useState(suggestion.recentlyAdded)
 
   useEffect(() => {
-    setRecentlyMounted(isFirst)
-    setTimeout(() => setRecentlyMounted(false), 350)
-  }, [isFirst])
+    setRecentlyMounted(suggestion.recentlyAdded || false)
+    setTimeout(() => setRecentlyMounted(false), 300)
+  }, [suggestion.recentlyAdded])
 
   const onDelete = useCallback(() => onRemove(idx), [idx, onRemove])
   const onClickDifference = useCallback(() => setHome(idx), [idx, setHome])
@@ -71,6 +65,8 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
     })
   )
 
+  const country = getCountry(suggestion)
+
   return (
     <div
       className={rowClassNames + ' ' + (isRecentlyMounted ? recentlyMountedClass : '')}
@@ -84,8 +80,8 @@ const SuggestionRow: React.FC<SuggestionProps> = ({
           {idx === 0 && <FontAwesomeIcon icon={faHome} />}
           {idx !== 0 && (
             <>
-              {difference > 0 && '+'}
-              {difference}
+              {suggestion.difference > 0 && '+'}
+              {suggestion.difference}
             </>
           )}
         </div>

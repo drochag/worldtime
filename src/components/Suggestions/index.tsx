@@ -17,8 +17,13 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
 
   setHome = (homeIdx: number) => {
     const selectedSuggestions = [
-      this.state.selectedSuggestions[homeIdx],
-      ...this.state.selectedSuggestions.filter((s, idx) => idx !== homeIdx),
+      { ...this.state.selectedSuggestions[homeIdx], recentlyAdded: true },
+      ...this.state.selectedSuggestions
+        .filter((s, idx) => idx !== homeIdx)
+        .map(suggestion => ({
+          ...suggestion,
+          recentlyAdded: false,
+        })),
     ]
     this.setState({ selectedSuggestions })
     ls('suggestions', selectedSuggestions)
@@ -39,7 +44,10 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
         return
       }
 
-      const newSuggestions = [...selectedSuggestions, extendedSuggestion]
+      const newSuggestions = [
+        ...selectedSuggestions.map(s => ({ ...s, recentlyAdded: false })),
+        { ...extendedSuggestion, recentlyAdded: true },
+      ]
       this.setState({
         loading: false,
         existingSuggestion: false,
@@ -50,7 +58,10 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
   }
 
   removeSuggestion = (idx: number) => {
-    const selectedSuggestions = [...this.state.selectedSuggestions]
+    const selectedSuggestions = [...this.state.selectedSuggestions].map(suggestion => ({
+      ...suggestion,
+      recentlyAdded: false,
+    }))
     selectedSuggestions.splice(idx, 1)
     this.setState({ selectedSuggestions })
     ls('suggestions', selectedSuggestions)
