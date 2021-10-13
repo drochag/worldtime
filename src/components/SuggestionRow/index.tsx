@@ -52,7 +52,6 @@ const SuggestionRow: React.FC<SuggestionProps> = ({ suggestion, onRemove, idx, s
 
   const onDelete = useCallback(() => onRemove(idx), [idx, onRemove])
   const onClickDifference = useCallback(() => setHome(idx), [idx, setHome])
-
   const country = getCountry(suggestion)
 
   return (
