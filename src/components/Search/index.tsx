@@ -95,7 +95,7 @@ const Search: React.FC<SearchProps> = ({ onSelect, loading }) => {
         getOptionLabel={getOptionLabel}
         styles={customStyles(!isDarkMode)}
         theme={theme}
-        id="search"
+        inputId="search"
       />
       {loading && (
         <div className="inline-block mt-2 md:ml-3 md:mt-0 text-gray-600">
