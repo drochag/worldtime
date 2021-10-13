@@ -27,7 +27,7 @@ const getHourClasses = (hours: number, idx: number): string => {
   return [timeClass, borderClass, hourClass].join(' ')
 }
 
-const Hour: React.FC<HourProps> = React.memo(({ idx, difference, time, setHighlighted }) => {
+const Hour: React.FC<HourProps> = ({ idx, difference, time, setHighlighted }) => {
   const calculatedTime = new Date(time)
   calculatedTime.setHours(calculatedTime.getHours() - 1 + difference + idx)
 
@@ -53,7 +53,7 @@ const Hour: React.FC<HourProps> = React.memo(({ idx, difference, time, setHighli
   return (
     <div className={hourClass} onClick={setHighlight} onMouseEnter={setHighlight}>
       <span
-        className="day text-xxs mt-1 absolute mb-1 text-black duration-300 transition-colors ease-linear dark:text-white"
+        className="day text-xxs mt-1 absolute mb-1 text-black duration-300 transition-colors ease-linear dark:text-blue-900 dark:font-bold"
         style={{ top: '-1.5rem' }}
       >
         {new Intl.DateTimeFormat('en-US', {
@@ -68,6 +68,6 @@ const Hour: React.FC<HourProps> = React.memo(({ idx, difference, time, setHighli
       <span className="date text-xxs">{calculatedTime.getDate()}</span>
     </div>
   )
-})
+}
 
 export default memo(Hour)

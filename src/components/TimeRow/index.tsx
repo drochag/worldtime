@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { memo } from 'react'
 import { TimeProps } from 'types'
 import Hour from 'components/Hour'
 
 const rowClassNames = `h-16 flex items-center mb-4`
 const hoursInDay = 24
 
-const TimeRow: React.FC<TimeProps> = React.memo(({ time, difference, setHighlighted }) => (
+const TimeRow: React.FC<TimeProps> = ({ time, difference, setHighlighted }) => (
   <div className={rowClassNames}>
     {new Array(hoursInDay).fill('.').map((_, idx) => (
       <Hour
@@ -17,6 +17,6 @@ const TimeRow: React.FC<TimeProps> = React.memo(({ time, difference, setHighligh
       />
     ))}
   </div>
-))
+)
 
-export default TimeRow
+export default memo(TimeRow)

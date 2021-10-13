@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { memo, useMemo, useState } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
@@ -64,6 +64,7 @@ const App: React.FC<Partial<WithDarkModeProps>> = ({ theme, toggleNextTheme }) =
           <button
             className="ml-3 align-middle border-2 rounded-full p-2 border-white duration-300 transition-colors ease-linear dark:border-darkSecondary"
             onClick={() => toggleNextTheme!()}
+            aria-label="theme"
           >
             {icon}
           </button>
@@ -72,7 +73,7 @@ const App: React.FC<Partial<WithDarkModeProps>> = ({ theme, toggleNextTheme }) =
       <div className="max-w-7xl w-full mx-auto">
         <Suggestions>{props => <Search {...props} />}</Suggestions>
       </div>
-      <footer className="text-secondary duration-300 transition-colors ease-linear dark:text-darkSecondary pb-4 mt-4 text-center w-full">
+      <footer className="text-lg text-secondary duration-300 transition-colors ease-linear dark:text-darkSecondary pb-4 mt-4 text-center w-full">
         Made with <FontAwesomeIcon icon={faHeart} /> by&nbsp;
         <a
           className="underline"
@@ -87,4 +88,4 @@ const App: React.FC<Partial<WithDarkModeProps>> = ({ theme, toggleNextTheme }) =
   )
 }
 
-export default withDarkMode(App)
+export default withDarkMode(memo(App))

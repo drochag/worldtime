@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useCallback, memo } from 'react'
 
 import { TimesListProps } from 'types'
 import TimeRow from 'components/TimeRow'
@@ -17,7 +17,7 @@ const getStyles = ({
   ...(highlighted !== undefined && { zIndex: '4' }),
 })
 
-const TimesList: React.FC<TimesListProps> = React.memo(({ selectedSuggestions }) => {
+const TimesList: React.FC<TimesListProps> = ({ selectedSuggestions }) => {
   const [highlighted, setHighlighted] = useState(1)
   const removeHighlight = useCallback(() => setHighlighted(1), [])
   return (
@@ -40,6 +40,6 @@ const TimesList: React.FC<TimesListProps> = React.memo(({ selectedSuggestions })
       ))}
     </div>
   )
-})
+}
 
-export default TimesList
+export default memo(TimesList)

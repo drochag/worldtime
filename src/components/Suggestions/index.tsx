@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { memo } from 'react'
 import SuggestionsList from 'components/SuggestionsList'
 import { getExtendedSuggestion } from 'components/api'
 import { SuggestionsProps, SuggestionsState, Suggestion, ExtendedSuggestion } from 'types'
@@ -95,18 +95,18 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
           loading,
         })}
         {selectedSuggestions.length === 0 && (
-          <div className="mt-4 text-center text-primary duration-300 transition-colors ease-linear dark:text-darkPrimary font-medium">
+          <div className="mt-4 text-center text-primary duration-300 transition-colors ease-linear dark:text-blue-900 font-medium">
             Search a place to show its time.
           </div>
         )}
         {selectedSuggestions.length !== 0 && (
-          <div className="mt-4 text-center text-primary duration-300 transition-colors ease-linear dark:text-darkPrimary font-medium">
+          <div className="mt-4 text-center text-primary duration-300 transition-colors ease-linear dark:text-blue-900 font-medium">
             <span className="md:hidden mr-2">Tap a time to move the ruler.</span>
             You can tap the circles to set that location as your home.
           </div>
         )}
         {existingSuggestion && (
-          <div className="mt-4 text-center text-primary duration-300 transition-colors ease-linear dark:text-darkPrimary font-medium">
+          <div className="mt-4 text-center text-primary duration-300 transition-colors ease-linear dark:text-blue-900 font-medium">
             You've already added that location
           </div>
         )}
@@ -125,4 +125,4 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
   }
 }
 
-export default Suggestions
+export default memo(Suggestions)
