@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { memo } from 'react'
 import SuggestionsList from 'components/SuggestionsList'
 import { getExtendedSuggestion } from 'components/api'
 import { SuggestionsProps, SuggestionsState, Suggestion, ExtendedSuggestion } from 'types'
 // import info from './info.json' // debugging purposes
 import TimesList from 'components/TimesList'
 import ls from 'local-storage'
+import { TimeContext } from 'utils/TimeContext'
 
 class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
+  static contextType = TimeContext
   state: SuggestionsState = {
     loading: false,
     existingSuggestion: false,
@@ -73,6 +75,18 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
       ...suggestion,
       difference:
         (suggestion.timezone.rawOffset - selectedSuggestions[0].timezone.rawOffset) / 60 / 60,
+      time: new Date(
+        new Date(this.context).toLocaleString('en-us', {
+          timeZone: suggestion.timezone.timeZoneId,
+          hour12: false,
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+        })
+      ),
     }))
     return (
       <div className="w-full p-3 bg-white duration-300 transition-colors ease-linear dark:bg-darkSecondary mt-10 rounded-lg shadow-xl">
@@ -81,30 +95,29 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
           loading,
         })}
         {selectedSuggestions.length === 0 && (
-          <div className="mt-4 text-center text-primary duration-300 transition-colors ease-linear dark:text-darkPrimary font-medium">
+          <div className="mt-4 text-center text-primary duration-300 transition-colors ease-linear dark:text-blue-900 font-medium">
             Search a place to show its time.
           </div>
         )}
         {selectedSuggestions.length !== 0 && (
-          <div className="mt-4 text-center text-primary duration-300 transition-colors ease-linear dark:text-darkPrimary font-medium">
+          <div className="mt-4 text-center text-primary duration-300 transition-colors ease-linear dark:text-blue-900 font-medium">
             <span className="md:hidden mr-2">Tap a time to move the ruler.</span>
             You can tap the circles to set that location as your home.
           </div>
         )}
         {existingSuggestion && (
-          <div className="mt-4 text-center text-primary duration-300 transition-colors ease-linear dark:text-darkPrimary font-medium">
+          <div className="mt-4 text-center text-primary duration-300 transition-colors ease-linear dark:text-blue-900 font-medium">
             You've already added that location
           </div>
         )}
         {selectedSuggestions.length !== 0 && (
           <div className="overflow-x-auto flex relative xxl:justify-center">
             <SuggestionsList
-              time={this.props.time}
               selectedSuggestions={withDifference}
               onRemove={this.removeSuggestion}
               setHome={this.setHome}
             />
-            <TimesList time={this.props.time} selectedSuggestions={withDifference} />
+            <TimesList selectedSuggestions={withDifference} />
           </div>
         )}
       </div>
@@ -112,4 +125,4 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
   }
 }
 
-export default Suggestions
+export default memo(Suggestions)

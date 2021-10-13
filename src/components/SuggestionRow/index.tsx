@@ -42,7 +42,7 @@ export const getName = (components: AddressComponent[], types: string[]): string
   return components[0].long_name
 }
 
-const SuggestionRow: React.FC<SuggestionProps> = ({ suggestion, onRemove, idx, setHome, time }) => {
+const SuggestionRow: React.FC<SuggestionProps> = ({ suggestion, onRemove, idx, setHome }) => {
   const [isRecentlyMounted, setRecentlyMounted] = useState(suggestion.recentlyAdded)
 
   useEffect(() => {
@@ -52,19 +52,6 @@ const SuggestionRow: React.FC<SuggestionProps> = ({ suggestion, onRemove, idx, s
 
   const onDelete = useCallback(() => onRemove(idx), [idx, onRemove])
   const onClickDifference = useCallback(() => setHome(idx), [idx, setHome])
-  const suggestionTime = new Date(
-    new Date(time).toLocaleString('en-us', {
-      timeZone: suggestion.timezone.timeZoneId,
-      hour12: false,
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-    })
-  )
-
   const country = getCountry(suggestion)
 
   return (
@@ -88,7 +75,7 @@ const SuggestionRow: React.FC<SuggestionProps> = ({ suggestion, onRemove, idx, s
       </div>
       <City
         country={country}
-        time={suggestionTime}
+        time={suggestion.time}
         name={getName(suggestion.address_components, suggestion.types)}
         abbreviation={suggestion.abbreviation}
       />

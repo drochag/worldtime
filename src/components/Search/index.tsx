@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react'
+import React, { memo, useCallback } from 'react'
 import debounce from 'lodash/debounce'
-import Async from 'react-select/async';
+import Async from 'react-select/async'
 
 import { getPlaces } from '../api'
 import { SearchProps, Suggestion } from 'types'
@@ -84,6 +84,9 @@ const Search: React.FC<SearchProps> = ({ onSelect, loading }) => {
 
   return (
     <>
+      <label htmlFor="search" style={{ visibility: 'hidden' }}>
+        Search
+      </label>
       <Async
         placeholder="Find place by typing"
         onChange={onChange}
@@ -92,6 +95,7 @@ const Search: React.FC<SearchProps> = ({ onSelect, loading }) => {
         getOptionLabel={getOptionLabel}
         styles={customStyles(!isDarkMode)}
         theme={theme}
+        id="search"
       />
       {loading && (
         <div className="inline-block mt-2 md:ml-3 md:mt-0 text-gray-600">
@@ -102,4 +106,4 @@ const Search: React.FC<SearchProps> = ({ onSelect, loading }) => {
   )
 }
 
-export default Search
+export default memo(Search)

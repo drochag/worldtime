@@ -30,7 +30,6 @@ describe('City', () => {
       <City
         name={getName(info[0].address_components, info[0].types)}
         abbreviation={info[0].abbreviation}
-        difference={0}
         country={country}
         time={staticDate}
       />
@@ -51,7 +50,6 @@ describe('City', () => {
       <City
         name={getName(info[1].address_components, info[1].types)}
         abbreviation={info[1].abbreviation}
-        difference={0}
         country={country}
         time={staticDate}
       />
@@ -71,7 +69,6 @@ describe('City', () => {
       <City
         name={getName(info[1].address_components, info[1].types)}
         abbreviation={info[1].abbreviation}
-        difference={2}
         country={country}
         time={staticDate}
       />
@@ -88,7 +85,6 @@ describe('City', () => {
       <City
         name={getName(info[1].address_components, info[1].types)}
         abbreviation={info[1].abbreviation}
-        difference={-2}
         country={country}
         time={staticDate}
       />

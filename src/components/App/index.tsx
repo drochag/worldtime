@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import React, { memo, useMemo, useState } from 'react'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
@@ -7,6 +7,7 @@ import Search from 'components/Search'
 import Suggestions from 'components/Suggestions'
 import useInterval from 'utils/useInterval'
 import withDarkMode, { WithDarkModeProps } from 'hoc/withDarkMode'
+import { TimeContext } from 'utils/TimeContext'
 
 const moon = (
   <svg
@@ -45,6 +46,7 @@ const sun = (
     />
   </svg>
 )
+
 const App: React.FC<Partial<WithDarkModeProps>> = ({ theme, toggleNextTheme }) => {
   const [time, setTime] = useState(new Date())
 
@@ -55,22 +57,23 @@ const App: React.FC<Partial<WithDarkModeProps>> = ({ theme, toggleNextTheme }) =
   const icon = useMemo(() => (theme === 'light' ? sun : theme === 'auto' ? arrows : moon), [theme])
 
   return (
-    <>
+    <TimeContext.Provider value={time}>
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl md:text-6xl text-secondary duration-300 transition-colors ease-linear dark:text-darkSecondary leading-tight mt-12 text-center">
           Worldtime Clock
           <button
             className="ml-3 align-middle border-2 rounded-full p-2 border-white duration-300 transition-colors ease-linear dark:border-darkSecondary"
             onClick={() => toggleNextTheme!()}
+            aria-label="theme"
           >
             {icon}
           </button>
         </h1>
       </div>
       <div className="max-w-7xl w-full mx-auto">
-        <Suggestions time={time}>{props => <Search {...props} />}</Suggestions>
+        <Suggestions>{props => <Search {...props} />}</Suggestions>
       </div>
-      <footer className="text-secondary duration-300 transition-colors ease-linear dark:text-darkSecondary pb-4 mt-4 text-center w-full">
+      <footer className="text-lg text-secondary duration-300 transition-colors ease-linear dark:text-darkSecondary pb-4 mt-4 text-center w-full">
         Made with <FontAwesomeIcon icon={faHeart} /> by&nbsp;
         <a
           className="underline"
@@ -81,8 +84,8 @@ const App: React.FC<Partial<WithDarkModeProps>> = ({ theme, toggleNextTheme }) =
           Dan Rocha
         </a>
       </footer>
-    </>
+    </TimeContext.Provider>
   )
 }
 
-export default withDarkMode(App)
+export default withDarkMode(memo(App))

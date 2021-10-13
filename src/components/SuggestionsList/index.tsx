@@ -6,7 +6,6 @@ const SuggestionsList: React.FC<SuggestionsListProps> = ({
   onRemove,
   setHome,
   selectedSuggestions,
-  time,
 }) => (
   <div className="pt-4 sticky -left-1 bg-white duration-300 transition-colors ease-linear dark:bg-darkSecondary pr-4 z-10">
     {selectedSuggestions.map((suggestion, idx) => (
@@ -16,7 +15,6 @@ const SuggestionsList: React.FC<SuggestionsListProps> = ({
         onRemove={onRemove}
         setHome={setHome}
         suggestion={suggestion}
-        time={time}
       />
     ))}
   </div>
