@@ -1,5 +1,4 @@
 export interface SuggestionsProps {
-  time: date
   children(props: SearchProps): JSX.Element
 }
 
@@ -23,6 +22,7 @@ export type ExtendedSuggestion = ServerSuggestion &
   }
 export type ExtendedSuggestionWithDifference = ExtendedSuggestion & {
   difference: number
+  time: date
 }
 
 export interface SuggestionsState {
@@ -92,16 +92,13 @@ export interface SuggestionProps {
   setHome: (idx: number) => void
   suggestion: ExtendedSuggestionWithDifference
   idx: number
-  time: date
 }
 
 export interface SuggestionsListProps extends Pick<SuggestionProps, 'onRemove' | 'setHome'> {
   selectedSuggestions: ExtendedSuggestionWithDifference[]
-  time: date
 }
 
-export interface TimesListProps
-  extends Pick<SuggestionsListProps, 'selectedSuggestions' | 'time'> {}
+export interface TimesListProps extends Pick<SuggestionsListProps, 'selectedSuggestions'> {}
 
 export interface TimeProps {
   time: date

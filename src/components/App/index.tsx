@@ -7,6 +7,7 @@ import Search from 'components/Search'
 import Suggestions from 'components/Suggestions'
 import useInterval from 'utils/useInterval'
 import withDarkMode, { WithDarkModeProps } from 'hoc/withDarkMode'
+import { TimeContext } from 'utils/TimeContext'
 
 const moon = (
   <svg
@@ -45,6 +46,7 @@ const sun = (
     />
   </svg>
 )
+
 const App: React.FC<Partial<WithDarkModeProps>> = ({ theme, toggleNextTheme }) => {
   const [time, setTime] = useState(new Date())
 
@@ -55,7 +57,7 @@ const App: React.FC<Partial<WithDarkModeProps>> = ({ theme, toggleNextTheme }) =
   const icon = useMemo(() => (theme === 'light' ? sun : theme === 'auto' ? arrows : moon), [theme])
 
   return (
-    <>
+    <TimeContext.Provider value={time}>
       <div className="max-w-7xl mx-auto">
         <h1 className="text-4xl md:text-6xl text-secondary duration-300 transition-colors ease-linear dark:text-darkSecondary leading-tight mt-12 text-center">
           Worldtime Clock
@@ -68,7 +70,7 @@ const App: React.FC<Partial<WithDarkModeProps>> = ({ theme, toggleNextTheme }) =
         </h1>
       </div>
       <div className="max-w-7xl w-full mx-auto">
-        <Suggestions time={time}>{props => <Search {...props} />}</Suggestions>
+        <Suggestions>{props => <Search {...props} />}</Suggestions>
       </div>
       <footer className="text-secondary duration-300 transition-colors ease-linear dark:text-darkSecondary pb-4 mt-4 text-center w-full">
         Made with <FontAwesomeIcon icon={faHeart} /> by&nbsp;
@@ -81,7 +83,7 @@ const App: React.FC<Partial<WithDarkModeProps>> = ({ theme, toggleNextTheme }) =
           Dan Rocha
         </a>
       </footer>
-    </>
+    </TimeContext.Provider>
   )
 }
 

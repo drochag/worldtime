@@ -5,8 +5,10 @@ import { SuggestionsProps, SuggestionsState, Suggestion, ExtendedSuggestion } fr
 // import info from './info.json' // debugging purposes
 import TimesList from 'components/TimesList'
 import ls from 'local-storage'
+import { TimeContext } from 'utils/TimeContext'
 
 class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
+  static contextType = TimeContext
   state: SuggestionsState = {
     loading: false,
     existingSuggestion: false,
@@ -73,6 +75,18 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
       ...suggestion,
       difference:
         (suggestion.timezone.rawOffset - selectedSuggestions[0].timezone.rawOffset) / 60 / 60,
+      time: new Date(
+        new Date(this.context).toLocaleString('en-us', {
+          timeZone: suggestion.timezone.timeZoneId,
+          hour12: false,
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: 'numeric',
+          minute: 'numeric',
+        })
+      ),
     }))
     return (
       <div className="w-full p-3 bg-white duration-300 transition-colors ease-linear dark:bg-darkSecondary mt-10 rounded-lg shadow-xl">
@@ -99,12 +113,11 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
         {selectedSuggestions.length !== 0 && (
           <div className="overflow-x-auto flex relative xxl:justify-center">
             <SuggestionsList
-              time={this.props.time}
               selectedSuggestions={withDifference}
               onRemove={this.removeSuggestion}
               setHome={this.setHome}
             />
-            <TimesList time={this.props.time} selectedSuggestions={withDifference} />
+            <TimesList selectedSuggestions={withDifference} />
           </div>
         )}
       </div>
