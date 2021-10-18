@@ -2,7 +2,6 @@ import React, { useState, useCallback, memo, useMemo } from 'react'
 
 import { TimesListProps } from 'types'
 import TimeRow from 'components/TimeRow'
-import { stringify } from 'querystring'
 
 const getStyles = (suggestions: number): Record<string, string> => ({
   height: suggestions * 5 - 2 + 'rem',

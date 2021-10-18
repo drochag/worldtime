@@ -1,4 +1,3 @@
-import { min } from 'lodash'
 import React, { memo, useCallback, useMemo } from 'react'
 import { HourProps } from 'types'
 
@@ -41,7 +40,6 @@ const Hour: React.FC<HourProps> = ({ idx, time, difference, setHighlighted }) =>
   const calculatedTime = new Date(time)
   calculatedTime.setHours(calculatedTime.getHours() - 1 + idx)
   if (minutesDifference !== 0) {
-    console.log(minutesDifference)
     calculatedTime.setMinutes(calculatedTime.getMinutes() - minutesDifference)
   }
   const hours = calculatedTime.getHours()
