@@ -4,6 +4,7 @@ import { faTrash, faHome } from '@fortawesome/free-solid-svg-icons'
 import City from 'components/City'
 import { AddressComponent, SuggestionProps } from 'types'
 import getCountry from 'utils/getCountry'
+import { noop } from 'lodash'
 
 const rowClassNames = `
   flex
@@ -51,7 +52,7 @@ const SuggestionRow: React.FC<SuggestionProps> = ({ suggestion, onRemove, idx, s
   }, [suggestion.recentlyAdded])
 
   const onDelete = useCallback(() => onRemove(idx), [idx, onRemove])
-  const onClickDifference = useCallback(() => setHome(idx), [idx, setHome])
+  const onClickDifference = useCallback(() => (!idx ? noop() : setHome(idx)), [idx, setHome])
   const country = getCountry(suggestion)
 
   return (

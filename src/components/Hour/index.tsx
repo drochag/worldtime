@@ -1,4 +1,5 @@
-import React, { memo, useCallback } from 'react'
+import { min } from 'lodash'
+import React, { memo, useCallback, useMemo } from 'react'
 import { HourProps } from 'types'
 
 const getHourClasses = (hours: number, idx: number): string => {
@@ -27,14 +28,25 @@ const getHourClasses = (hours: number, idx: number): string => {
   return [timeClass, borderClass, hourClass].join(' ')
 }
 
-const Hour: React.FC<HourProps> = ({ idx, difference, time, setHighlighted }) => {
-  const calculatedTime = new Date(time)
-  calculatedTime.setHours(calculatedTime.getHours() - 1 + difference + idx)
+const Hour: React.FC<HourProps> = ({ idx, time, difference, setHighlighted }) => {
+  const hasDifference = difference - Math.floor(difference) !== 0
+  const minutesDifference = useMemo(() => {
+    let diff = Math.abs(60 * difference)
+    while (diff / 60 >= 1) {
+      diff -= 60
+    }
 
+    return diff
+  }, [difference])
+  const calculatedTime = new Date(time)
+  calculatedTime.setHours(calculatedTime.getHours() - 1 + idx)
+  if (minutesDifference !== 0) {
+    console.log(minutesDifference)
+    calculatedTime.setMinutes(calculatedTime.getMinutes() - minutesDifference)
+  }
   const hours = calculatedTime.getHours()
   const isPM = hours >= 12
   const hourClass = getHourClasses(hours, idx)
-  const hasHalfDifference = difference - Math.floor(difference) === 0.5
 
   const setHighlight = useCallback(() => setHighlighted(idx), [idx, setHighlighted])
 
@@ -43,7 +55,9 @@ const Hour: React.FC<HourProps> = ({ idx, difference, time, setHighlighted }) =>
       <div className={hourClass} onClick={setHighlight} onMouseEnter={setHighlight}>
         <span className="hour">
           {isPM ? (hours - 12 === 0 ? 12 : hours - 12) : hours}
-          {hasHalfDifference && <span className="minutes text-xxxs align-middle">:&nbsp;30</span>}
+          {hasDifference && (
+            <span className="minutes text-xxxs align-middle">:&nbsp;{minutesDifference}</span>
+          )}
         </span>
         <span className="time text-xxs">{isPM ? 'pm' : 'am'}</span>
       </div>
