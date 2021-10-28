@@ -1,6 +1,6 @@
-import React, { memo } from 'react'
+import React, { memo, useCallback, useMemo, useState } from 'react'
 
-import { TimesListProps, TimesListState } from 'types'
+import { TimesListProps } from 'types'
 import TimeRow from 'components/TimeRow'
 
 const getStyles = (suggestions: number): Record<string, string> => ({
@@ -15,40 +15,32 @@ const getHighlightedStyles = (highlighted?: number): Record<string, string> => (
   ...(highlighted !== undefined && { zIndex: '4' }),
 })
 
-class TimesList extends React.Component<TimesListProps, TimesListState> {
-  state: TimesListState = {
-    styles: getStyles(this.props.length),
-    highlightedStyles: getHighlightedStyles(1),
-  }
+const TimesList: React.FC<TimesListProps> = ({ length, selectedSuggestions }) => {
+  const [highlighted, setHighlighted] = useState(1)
+  const styles = useMemo(() => getStyles(length), [length])
+  const highlightedStyles = useMemo(() => getHighlightedStyles(highlighted), [highlighted])
+  const removeHighlight = useCallback(() => setHighlighted(1), [])
 
-  removeHighlight = () => this.setHighlighted(1)
-  setHighlighted = (highlighted: number) =>
-    this.setState({ highlightedStyles: getHighlightedStyles(highlighted) })
-
-  render() {
-    const { styles, highlightedStyles } = this.state
-
-    return (
-      <div className="mt-4 pr-5 relative" onMouseLeave={this.removeHighlight}>
-        <div
-          className="absolute w-8 bg-primary dark:bg-darkPrimary bg-opacity-20 rounded-lg"
-          style={styles}
+  return (
+    <div className="mt-4 pr-5 relative" onMouseLeave={removeHighlight}>
+      <div
+        className="absolute w-8 bg-primary dark:bg-darkPrimary bg-opacity-20 rounded-lg"
+        style={styles}
+      />
+      <div
+        className="absolute w-8 border-primary dark:border-purple-200 dark:bg-transparent border-opacity-50 border-2 rounded-lg"
+        style={{ ...styles, ...highlightedStyles }}
+      />
+      {selectedSuggestions.map(suggestion => (
+        <TimeRow
+          key={suggestion.formatted_address}
+          time={suggestion.time}
+          difference={suggestion.difference}
+          setHighlighted={setHighlighted}
         />
-        <div
-          className="absolute w-8 border-primary dark:border-purple-200 dark:bg-transparent border-opacity-50 border-2 rounded-lg"
-          style={{ ...styles, ...highlightedStyles }}
-        />
-        {this.props.selectedSuggestions.map(suggestion => (
-          <TimeRow
-            key={suggestion.formatted_address}
-            time={suggestion.time}
-            difference={suggestion.difference}
-            setHighlighted={this.setHighlighted}
-          />
-        ))}
-      </div>
-    )
-  }
+      ))}
+    </div>
+  )
 }
 
 export default memo(TimesList)

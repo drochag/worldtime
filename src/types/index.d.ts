@@ -111,11 +111,6 @@ export interface TimesListProps {
   selectedSuggestions: ExtendedSuggestionWithDifference[]
 }
 
-export interface TimesListState {
-  styles: Record<string, string>
-  highlightedStyles: Record<string, string>
-}
-
 export interface TimeProps {
   time: date
   difference: number
