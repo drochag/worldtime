@@ -4,12 +4,12 @@ export default function getWithDifferences(
   suggestions: ExtendedSuggestion[],
   time: Date
 ): ExtendedSuggestionWithDifference[] {
-  return suggestions.map((s, index) => ({
+  const withDifference = suggestions.map((s, index) => ({
     ...s,
     recentlyAdded: index === suggestions.length,
     index,
     difference:
-      (s.timezone.rawOffset - (suggestions[0].timezone.rawOffset || s.timezone.rawOffset)) /
+      (s.timezone.rawOffset - (suggestions[0].timezone.rawOffset ?? s.timezone.rawOffset)) /
       60 /
       60,
     time: new Date(
@@ -27,4 +27,6 @@ export default function getWithDifferences(
         .replace('24:', '00:')
     ),
   }))
+  console.log(withDifference)
+  return withDifference
 }
