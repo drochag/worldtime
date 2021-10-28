@@ -4,8 +4,6 @@ import Async from 'react-select/async'
 
 import { getPlaces } from '../api'
 import { SearchProps, Suggestion } from 'types'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 const customStyles = isDarkMode => ({
   container: provided => ({
@@ -96,12 +94,8 @@ const Search: React.FC<SearchProps> = ({ onSelect, loading }) => {
         styles={customStyles(!isDarkMode)}
         theme={theme}
         inputId="search"
+        isLoading={loading}
       />
-      {loading && (
-        <div className="inline-block mt-2 md:ml-3 md:mt-0 text-gray-600">
-          <FontAwesomeIcon icon={faSpinner} className="fa-spin mr-3" /> Loading ...
-        </div>
-      )}
     </>
   )
 }

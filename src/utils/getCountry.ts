@@ -1,9 +1,8 @@
-import { Suggestion } from 'types'
+import { AddressComponent } from 'types'
 
-export default function (suggestion: Suggestion): string {
+export default function (addressComponents: AddressComponent[]): string {
   return (
-    suggestion.address_components.find(component =>
-      component.types.find(type => type === 'country')
-    )?.short_name || ''
+    addressComponents.find(component => component.types.find(type => type === 'country'))
+      ?.short_name || ''
   )
 }

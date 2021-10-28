@@ -5,7 +5,8 @@
     "prettier": true,
     "interface-name": false,
     "jsx-no-lambda": false,
-    "no-angle-bracket-type-assertion": false
+    "no-angle-bracket-type-assertion": false,
+    "jsx-boolean-value": ["never"]
   },
   "linterOptions": {
     "exclude": ["src/serviceWorker.ts"]

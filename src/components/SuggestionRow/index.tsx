@@ -1,10 +1,9 @@
 import React, { memo, useCallback, useEffect, useState } from 'react'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrash, faHome } from '@fortawesome/free-solid-svg-icons'
 import City from 'components/City'
 import { AddressComponent, SuggestionProps } from 'types'
 import getCountry from 'utils/getCountry'
-import { noop } from 'lodash'
+import { Trash, Sort } from 'components/Icons'
+import { SortableHandle } from 'react-sortable-hoc'
 
 const rowClassNames = `
   flex
@@ -18,20 +17,30 @@ const rowClassNames = `
   dark:bg-opacity-50
 `
 
+const iconContainerClassNames = `
+  md:w-9 w-8 text-sm md:text-lg
+`
+
+const iconClassNames = `
+  w-5 md:w-8 h-5 md:h-8 p-1 md:p-2 hover:bg-secondary rounded-full overflow-visible
+`
+
 const circleClassNames = `
-  hover:bg-gray-400
-  transition-colors duration-600
-  circle cursor-pointer
-  w-8 rounded-full bg-secondary flex
-  h-8 items-center justify-center
-  md:mr-2
-  text-sm
-  md:w-10
-  md:h-10
-  md:text-lg
+  ${iconClassNames}
+  circle
+  rounded-full
+  flex justify-center items-center
+  bg-secondary mx-auto
+  cursor-default
 `
 
 const recentlyMountedClass = `bg-primary dark:bg-purple-100`
+
+const DragHandle = SortableHandle(() => (
+  <div className={iconContainerClassNames}>
+    <Sort className={`${iconClassNames} cursor-pointer`} />
+  </div>
+))
 
 export const getName = (components: AddressComponent[], types: string[]): string => {
   const address = components.find(
@@ -43,44 +52,58 @@ export const getName = (components: AddressComponent[], types: string[]): string
   return components[0].long_name
 }
 
-const SuggestionRow: React.FC<SuggestionProps> = ({ suggestion, onRemove, idx, setHome }) => {
-  const [isRecentlyMounted, setRecentlyMounted] = useState(suggestion.recentlyAdded)
+const SuggestionRow: React.FC<SuggestionProps> = ({
+  abbreviation,
+  address_components: addressComponents,
+  difference,
+  formatted_address: formattedAddress,
+  onRemove,
+  recentlyAdded,
+  time,
+  types,
+}) => {
+  const [isRecentlyMounted, setRecentlyMounted] = useState(recentlyAdded)
 
   useEffect(() => {
-    setRecentlyMounted(suggestion.recentlyAdded || false)
-    setTimeout(() => setRecentlyMounted(false), 300)
-  }, [suggestion.recentlyAdded])
+    setRecentlyMounted(recentlyAdded || false)
+    setTimeout(() => {
+      setRecentlyMounted(false)
+    }, 300)
+  }, [recentlyAdded])
 
-  const onDelete = useCallback(() => onRemove(idx), [idx, onRemove])
-  const onClickDifference = useCallback(() => (!idx ? noop() : setHome(idx)), [idx, setHome])
-  const country = getCountry(suggestion)
+  const onDelete = useCallback(
+    evt => {
+      evt.stopPropagation()
+      onRemove(formattedAddress)
+    },
+    [formattedAddress, onRemove]
+  )
+  const country = getCountry(addressComponents)
 
   return (
-    <div
+    <li
       className={rowClassNames + ' ' + (isRecentlyMounted ? recentlyMountedClass : '')}
-      key={suggestion.formatted_address}
+      key={formattedAddress}
     >
       <div className="flex items-center text-center md:text-left align-center flex-col md:flex-row">
-        <div className="md:w-10 w-6 text-sm md:text-lg cursor-pointer">
-          <FontAwesomeIcon icon={faTrash} className="md:mr-3 mb-2 md:mb-0" onClick={onDelete} />
+        <DragHandle />
+        <div className={iconContainerClassNames}>
+          <Trash className={`${iconClassNames} cursor-pointer`} onClick={onDelete} />
         </div>
-        <div className={circleClassNames} onClick={onClickDifference}>
-          {idx === 0 && <FontAwesomeIcon icon={faHome} />}
-          {idx !== 0 && (
-            <>
-              {suggestion.difference > 0 && '+'}
-              {suggestion.difference}
-            </>
-          )}
+        <div className={iconContainerClassNames}>
+          <div className={circleClassNames}>
+            {difference > 0 && '+'}
+            {difference}
+          </div>
         </div>
       </div>
       <City
         country={country}
-        time={suggestion.time}
-        name={getName(suggestion.address_components, suggestion.types)}
-        abbreviation={suggestion.abbreviation}
+        time={time}
+        name={getName(addressComponents, types)}
+        abbreviation={abbreviation}
       />
-    </div>
+    </li>
   )
 }
 

@@ -2,6 +2,12 @@ export interface SuggestionsProps {
   children(props: SearchProps): JSX.Element
 }
 
+export interface SuggestionsState {
+  loading: boolean
+  existingSuggestion: boolean
+  selectedSuggestions: ExtendedSuggestionWithDifference[]
+}
+
 export interface Timezone {
   dstOffset: number
   rawOffset: number
@@ -21,19 +27,13 @@ export type ExtendedSuggestion = ServerSuggestion &
     recentlyAdded?: boolean
   }
 export type ExtendedSuggestionWithDifference = ExtendedSuggestion & {
+  index: number
   difference: number
   time: date
 }
 
-export interface SuggestionsState {
-  selectedSuggestions: ExtendedSuggestion[]
-  loading: boolean
-  existingSuggestion: boolean
-  noSuggestions: boolean
-}
-
 export interface SearchProps {
-  onSelect: (suggestion: Suggestion) => void
+  onSelect(suggestion: Suggestion): void
   loading: boolean
 }
 
@@ -87,28 +87,44 @@ export interface CityProps {
   abbreviation: string
 }
 
-export interface SuggestionProps {
-  onRemove: (idx: number) => void
-  setHome: (idx: number) => void
-  suggestion: ExtendedSuggestionWithDifference
-  idx: number
+export interface SuggestionProps
+  extends Pick<
+    ExtendedSuggestionWithDifference,
+    | 'recentlyAdded'
+    | 'formatted_address'
+    | 'difference'
+    | 'time'
+    | 'address_components'
+    | 'types'
+    | 'abbreviation'
+  > {
+  onRemove(suggestionLocation: string): void
 }
 
-export interface SuggestionsListProps extends Pick<SuggestionProps, 'onRemove' | 'setHome'> {
+export interface SuggestionsListProps extends Pick<SuggestionProps, 'onRemove'> {
+  selectedSuggestions: ExtendedSuggestionWithDifference[]
+  moveSuggestion({ oldIndex, newIndex }: { oldIndex: number; newIndex: number }): void
+}
+
+export interface TimesListProps {
+  length: number
   selectedSuggestions: ExtendedSuggestionWithDifference[]
 }
 
-export interface TimesListProps extends Pick<SuggestionsListProps, 'selectedSuggestions'> {}
+export interface TimesListState {
+  styles: Record<string, string>
+  highlightedStyles: Record<string, string>
+}
 
 export interface TimeProps {
   time: date
   difference: number
-  setHighlighted: (idx: number) => void
+  setHighlighted(idx: number): void
 }
 
 export interface HourProps {
   idx: number
   difference: number
   time: date
-  setHighlighted: (idx: number) => void
+  setHighlighted(idx: number): void
 }

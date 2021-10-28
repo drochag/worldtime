@@ -2,3 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;500;700&display=swap');
+
+.draggedElement {
+  @apply z-50;
+  @apply bg-primary;
+  @apply bg-opacity-50;
+}
+.dark .draggedElement {
+  @apply bg-darkPrimary;
+  @apply bg-opacity-50;
+}
+svg {
+  display: inline-block;
+}

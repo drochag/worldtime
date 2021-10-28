@@ -44,8 +44,8 @@ export const getExtendedSuggestion = (() => {
   const cache = {}
   return (suggestion: Suggestion): Promise<void | ExtendedSuggestion> => {
     const { lat, lng } = suggestion.geometry.location
-    const country = getCountry(suggestion)
     const location = `${lat},${lng}`
+    const country = getCountry(suggestion.address_components)
 
     if (cache[location]) {
       return Promise.resolve(cache[location])
