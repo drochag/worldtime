@@ -21,8 +21,9 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
     loading: false,
     existingSuggestion: false,
     selectedSuggestions:
-      ls('suggestions').map(suggestion => ({ ...suggestion, time: new Date(suggestion.time) })) ||
-      [],
+      ls('suggestions')
+        .filter(suggestion => !!suggestion.time)
+        .map(suggestion => ({ ...suggestion, time: new Date(suggestion.time) })) || [],
     // selectedSuggestions: info, // debugging purposes
   }
 
