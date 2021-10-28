@@ -27,6 +27,5 @@ export default function getWithDifferences(
         .replace('24:', '00:')
     ),
   }))
-  console.log(withDifference)
   return withDifference
 }
