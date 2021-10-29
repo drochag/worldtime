@@ -2,10 +2,15 @@ import React from 'react'
 
 type Theme = 'auto' | 'dark' | 'light'
 const colorThemes: Theme[] = ['auto', 'dark', 'light']
+const colorCodes: Record<string, string> = {
+  light: '#FF9D72',
+  dark: '#424874',
+}
 
 interface WithDarkModeState {
   theme: Theme
   root: HTMLElement
+  metaThemeColor: HTMLElement | null
   matchMedia: MediaQueryList
 }
 
@@ -19,6 +24,7 @@ const withDarkMode = <P extends object>(WrappedComponent: React.ComponentType<P>
     state: WithDarkModeState = {
       theme: 'auto',
       root: window.document.documentElement,
+      metaThemeColor: window.document.querySelector('meta[name="theme-color"]'),
       matchMedia: window.matchMedia('(prefers-color-scheme: dark)'),
     }
 
@@ -44,13 +50,34 @@ const withDarkMode = <P extends object>(WrappedComponent: React.ComponentType<P>
     }
 
     setActiveTheme = (force?: Theme) => {
-      const { theme, root } = this.state
+      const { theme, root, metaThemeColor } = this.state
+      const metaThemeColorElement =
+        metaThemeColor || window.document.querySelector('meta[name="theme-color"]')
       const nextTheme =
         force || colorThemes[colorThemes.indexOf(this.state.theme) + 1] || colorThemes[0]
 
       if (force !== theme) {
         localStorage.setItem('theme', nextTheme)
         this.setState({ theme: nextTheme })
+      }
+
+      if (!metaThemeColor) {
+        this.setState({
+          metaThemeColor: metaThemeColorElement,
+        })
+      }
+
+      if (metaThemeColorElement) {
+        metaThemeColorElement.setAttribute(
+          'content',
+          colorCodes[
+            nextTheme === 'auto'
+              ? window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light'
+              : nextTheme
+          ]
+        )
       }
 
       this.removeThemeClassNames()
