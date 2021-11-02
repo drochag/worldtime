@@ -1,5 +1,6 @@
 export interface SuggestionsProps {
   children(props: SearchProps): JSX.Element
+  time: date
 }
 
 export interface SuggestionsState {

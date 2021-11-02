@@ -11,12 +11,10 @@ import {
 // import info from './info.json' // debugging purposes
 import TimesList from 'components/TimesList'
 import ls from 'local-storage'
-import { TimeContext } from 'utils/TimeContext'
 import { arrayMoveImmutable } from 'array-move'
 import getWithDifferences from 'utils/getWithDifferences'
 
 class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
-  static contextType = TimeContext
   state: SuggestionsState = {
     loading: false,
     existingSuggestion: false,
@@ -25,6 +23,20 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
         .filter(suggestion => !!suggestion.time)
         .map(suggestion => ({ ...suggestion, time: new Date(suggestion.time) })) || [],
     // selectedSuggestions: info, // debugging purposes
+  }
+
+  componentDidMount() {
+    this.setState({
+      selectedSuggestions: getWithDifferences(this.state.selectedSuggestions, this.props.time),
+    })
+  }
+
+  componentDidUpdate({ time: prevTime }) {
+    if (prevTime.getTime() !== this.props.time.getTime()) {
+      this.setState({
+        selectedSuggestions: getWithDifferences(this.state.selectedSuggestions, this.props.time),
+      })
+    }
   }
 
   removeRecentlyAdded = () => {
@@ -43,7 +55,7 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
         from,
         to
       ),
-      this.context
+      this.props.time
     )
     this.setState({ selectedSuggestions })
     ls('suggestions', selectedSuggestions)
@@ -67,7 +79,7 @@ class Suggestions extends React.Component<SuggestionsProps, SuggestionsState> {
 
       const selectedSuggestions = getWithDifferences(
         [...this.state.selectedSuggestions, extendedSuggestion],
-        this.context
+        this.props.time
       )
 
       this.setState({ selectedSuggestions })
