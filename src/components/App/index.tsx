@@ -1,5 +1,6 @@
 import React, { memo, useMemo, useState } from 'react'
 
+import Warning from 'components/Warning'
 import Search from 'components/Search'
 import Suggestions from 'components/Suggestions'
 import useInterval from 'utils/useInterval'
@@ -18,7 +19,7 @@ const App: React.FC<Partial<WithDarkModeProps>> = ({ theme, toggleNextTheme }) =
 
   return (
     <>
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-7xl mx-auto text-center">
         <h1 className="text-4xl md:text-6xl text-secondary duration-300 transition-colors ease-linear dark:text-darkSecondary leading-tight mt-12 text-center">
           Worldtime Clock
           <button
@@ -29,6 +30,7 @@ const App: React.FC<Partial<WithDarkModeProps>> = ({ theme, toggleNextTheme }) =
             <Icon />
           </button>
         </h1>
+        <Warning />
       </div>
       <div className="max-w-7xl w-full mx-auto">
         <Suggestions time={time}>{props => <Search {...props} />}</Suggestions>
