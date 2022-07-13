@@ -24,7 +24,7 @@ export default function getWithDifferences(
           hour: 'numeric',
           minute: 'numeric',
         })
-        .replace('24:', '00:')
+        .replace('24:', '00:').replace(' at ', ' ')
     ),
   }))
   return withDifference
