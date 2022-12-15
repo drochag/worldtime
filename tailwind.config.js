@@ -1,4 +1,5 @@
 module.exports = {
+    content: ["./src/**/*.{html,js,tsx}"],
   experimental: {
     darkModeVariant: true,
   },
