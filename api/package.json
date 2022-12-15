@@ -12,7 +12,7 @@
     "axios": "^0.21.2"
   },
   "devDependencies": {
-    "serverless": "^2.57.0",
+    "serverless": "^3.25.1",
     "serverless-offline": "^8.1.0"
   }
 }

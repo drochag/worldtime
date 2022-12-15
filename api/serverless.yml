@@ -2,7 +2,8 @@ org: drochag1
 app: worldtime
 service: api
 
-frameworkVersion: '2'
+frameworkVersion: '3'
+useDotenv: true
 
 provider:
   name: aws
