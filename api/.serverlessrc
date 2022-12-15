@@ -1,0 +1,31 @@
+{
+  "userId": "WvyS6Cj9L3xrqv8Qg4",
+  "frameworkId": "5ec7b8e0-02ef-11ed-80aa-6926a95af0f7",
+  "trackingDisabled": false,
+  "enterpriseDisabled": false,
+  "meta": {
+    "created_at": 1657746263,
+    "updated_at": 1671126114
+  },
+  "users": {
+    "WvyS6Cj9L3xrqv8Qg4": {
+      "userId": "WvyS6Cj9L3xrqv8Qg4",
+      "name": "Dan Rocha",
+      "email": "drochag1@gmail.com",
+      "username": "drochag1",
+      "dashboard": {
+        "refreshToken": "hWl6CApIeDcvw0ZcFasE2GVifL4tnYqFsFnfiZ1_RkPo6",
+        "accessToken": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIiwiaXNzIjoiaHR0cHM6Ly9hdXRoLnNlcnZlcmxlc3MuY29tLyJ9..ufAC_7FA5DmfHIxb.htiE1RAaj0Zkd6EDJHEH_Etz_h0fNqDyWG0Py0KPx-0Vu8XIl4z6GWQpPIT1J6tj4cZtadjIqHoFewBHH6SMHNkU3ySOmZh4PICAH2cATjsEwtC4t08A86ndwD0xEPYvys0gB7-4xK79rpkwKxH2UZazU_keQYEpJchFPB3Y2P6a_qeV8Y498JZXGrCaL82OgYFFeg3aW8B4R5PySQrrFiM6gr0Zinh53huYhff7DHni0V7dKGBOavrisSOmb1-AMlOr2myxf4qzyNaSlN9Pd7haZ2UTYBEcxXTOTVIJGmUF6x5UgLy4YQg.Qrm3BSBzL3bw34WuRoMO_w",
+        "idToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6Ik56azVNREl5TVRnNFJqWTBORGswT0VJM1JrRXpORGN4UmtVMU1FWXdNemczT1VKQlFqRTBNZyJ9.eyJuaWNrbmFtZSI6ImRyb2NoYWciLCJuYW1lIjoiRGFuIFJvY2hhIiwicGljdHVyZSI6Imh0dHBzOi8vYXZhdGFycy5naXRodWJ1c2VyY29udGVudC5jb20vdS8xOTE5MzIyP3Y9NCIsInVwZGF0ZWRfYXQiOiIyMDIyLTEyLTEyVDE2OjMxOjQ5Ljc1MFoiLCJlbWFpbCI6ImRyb2NoYWcxQGdtYWlsLmNvbSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpc3MiOiJodHRwczovL2F1dGguc2VydmVybGVzcy5jb20vIiwic3ViIjoiZ2l0aHVifDE5MTkzMjIiLCJhdWQiOiJZQUhPRzhwYXBiMXRrckx0dE5Wb1ZPU3M0WUxPanJOaiIsImlhdCI6MTY3MDg2MjcxMSwiZXhwIjoxNjcxNzI2NzExLCJzaWQiOiIwdFN4NTZ4VEdab3ZBMWVKRFh2TlpCX2tlRFdscGRMeCJ9.Cj7bYH3P3dAq-UdYzR93tXq2lC0VOZyJnOlzw_Lb-hWxGdcdZKyv5_3k5MQGjo-PwHInHWnOeDU0yXpdobvdHxokSh_O7Xgdh-Bl0dyWOyx17TTVK0Sjn6t90mtK9rfQjnUEik655TdqPCq_CQCT-Ij5BVtctWwSwb6XjKQXONXMwN4eOPYLX-3X23ugte7c9oCv06xhE9vUO9C3xKTaraaNp7HembuS9eX0al-OZ-fFVkqq1212cT6jVT49pTjh3bAeIJ3lte7Gwoibq-K-AwsIckDKx1LArQ38vNbbXC_QhIoshqMAFcPzY4jiK0aQOx7rFBiTaqh1S-1W2v_eyg",
+        "expiresAt": 86400,
+        "username": "drochag1",
+        "accessKeys": {
+          "drochag1": "AKJH0XRcAMC7u1uu3VMhOCEvO2lVRNQRhf4EmyDI7xrRh"
+        }
+      }
+    }
+  },
+  "shownNotificationsHistory": {
+    "OUTDATED_MINOR_VERSION": 1657750963743
+  }
+}
