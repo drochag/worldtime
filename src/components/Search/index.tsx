@@ -1,5 +1,5 @@
-import React, { memo, useCallback } from 'react'
 import debounce from 'lodash/debounce'
+import React, { memo } from 'react'
 import Async from 'react-select/async'
 
 import { getPlaces } from '../api'
@@ -39,7 +39,7 @@ const Search: React.FC<SearchProps> = ({ onSelect, loading }) => {
   const root = window.document.documentElement
   const isDarkMode = root.classList.contains('dark')
 
-  const loadOptions = useCallback(()=>
+  const loadOptions = React.useCallback(()=>
   debounce((search: string, callback: (suggestions: Suggestion[]) => any) => {
     if (search.length < 3) {
       return
@@ -55,14 +55,14 @@ const Search: React.FC<SearchProps> = ({ onSelect, loading }) => {
     []
   )
 
-  const onChange = useCallback(
+  const onChange = React.useCallback(
     item => {
       onSelect(item)
     },
     [onSelect]
   )
 
-  const theme = useCallback(
+  const theme = React.useCallback(
     // tslint:disable-next-line: no-shadowed-variable
     theme => ({
       ...theme,
