@@ -1,5 +1,5 @@
-import React, { memo, useCallback } from 'react'
 import debounce from 'lodash/debounce'
+import React, { memo } from 'react'
 import Async from 'react-select/async'
 
 import { getPlaces } from '../api'
@@ -39,30 +39,30 @@ const Search: React.FC<SearchProps> = ({ onSelect, loading }) => {
   const root = window.document.documentElement
   const isDarkMode = root.classList.contains('dark')
 
-  const loadOptions = useCallback(
-    debounce((search: string, callback: (suggestions: Suggestion[]) => any) => {
-      if (search.length < 3) {
+  const loadOptions = React.useCallback(()=>
+  debounce((search: string, callback: (suggestions: Suggestion[]) => any) => {
+    if (search.length < 3) {
+      return
+    }
+
+    getPlaces(search).then(data => {
+      if (!data) {
         return
       }
-
-      getPlaces(search).then(data => {
-        if (!data) {
-          return
-        }
-        callback(data)
-      })
-    }, 750),
+      callback(data)
+    })
+  }, 750),
     []
   )
 
-  const onChange = useCallback(
+  const onChange = React.useCallback(
     item => {
       onSelect(item)
     },
     [onSelect]
   )
 
-  const theme = useCallback(
+  const theme = React.useCallback(
     // tslint:disable-next-line: no-shadowed-variable
     theme => ({
       ...theme,
@@ -89,7 +89,7 @@ const Search: React.FC<SearchProps> = ({ onSelect, loading }) => {
         placeholder="Find place by typing"
         onChange={onChange}
         value={null}
-        loadOptions={loadOptions}
+        loadOptions={loadOptions()}
         getOptionLabel={getOptionLabel}
         styles={customStyles(!isDarkMode)}
         theme={theme}
