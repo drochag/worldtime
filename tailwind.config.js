@@ -1,9 +1,9 @@
 module.exports = {
-    content: ["./src/**/*.{html,js,tsx}"],
+  content: ["./src/**/*.{html,js,tsx}"],
   experimental: {
     darkModeVariant: true,
   },
-  dark: 'class',
+  darkMode: 'class',
   target: 'relaxed',
   prefix: '',
   important: false,
