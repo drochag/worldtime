@@ -6,7 +6,7 @@ import Suggestions from 'components/Suggestions'
 import useInterval from 'utils/useInterval'
 import withDarkMode, { WithDarkModeProps } from 'hoc/withDarkMode'
 
-import { Moon, Switch, Sun, Heart } from 'components/Icons'
+import { Moon, Switch, Sun, Heart, Kofi } from 'components/Icons'
 
 const App: React.FC<Partial<WithDarkModeProps>> = ({ theme, toggleNextTheme }) => {
   const [time, setTime] = useState(new Date())
@@ -36,15 +36,29 @@ const App: React.FC<Partial<WithDarkModeProps>> = ({ theme, toggleNextTheme }) =
         <Suggestions time={time}>{props => <Search {...props} />}</Suggestions>
       </div>
       <footer className="text-lg text-secondary duration-300 transition-colors ease-linear dark:text-darkSecondary pb-4 mt-4 text-center w-full">
-        Made with <Heart /> by&nbsp;
-        <a
-          className="underline"
-          href="http://danielrocha.xyz"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Dan Rocha
-        </a>
+        <p>
+          Made with <Heart /> by&nbsp;
+          <a
+            className="underline"
+            href="http://danielrocha.xyz"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Dan Rocha
+          </a>
+        </p>
+
+        <p>
+          Support me through{' '}
+          <a
+            className="underline"
+            href="https://ko-fi.com/drochag"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Kofi />
+          </a>
+        </p>
       </footer>
     </>
   )
