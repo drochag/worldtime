@@ -5,13 +5,15 @@ export default function getWithDifferences(
   time: Date
 ): ExtendedSuggestionWithDifference[] {
   const withDifference = suggestions.map((s, index) => {
-    const rawDifference = (s.timezone.rawOffset - (suggestions[0].timezone.rawOffset ?? s.timezone.rawOffset))
-    const dstDifference = (s.timezone.dstOffset - (suggestions[0].timezone.dstOffset ?? s.timezone.dstOffset))
-    return({
+    const rawDifference =
+      s.timezone.rawOffset - (suggestions[0].timezone.rawOffset ?? s.timezone.rawOffset)
+    const dstDifference =
+      s.timezone.dstOffset - (suggestions[0].timezone.dstOffset ?? s.timezone.dstOffset)
+    return {
       ...s,
       recentlyAdded: index === suggestions.length,
       index,
-      difference:(rawDifference+dstDifference)/60/60,
+      difference: (rawDifference + dstDifference) / 60 / 60,
       time: new Date(
         time
           .toLocaleString('en-us', {
@@ -24,8 +26,10 @@ export default function getWithDifferences(
             hour: 'numeric',
             minute: 'numeric',
           })
-          .replace('24:', '00:').replace(' at ', ' ')
+          .replace('24:', '00:')
+          .replace(' at ', ' ')
       ),
-    })})
+    }
+  })
   return withDifference
 }

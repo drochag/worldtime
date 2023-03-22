@@ -39,19 +39,20 @@ const Search: React.FC<SearchProps> = ({ onSelect, loading }) => {
   const root = window.document.documentElement
   const isDarkMode = root.classList.contains('dark')
 
-  const loadOptions = React.useCallback(()=>
-  debounce((search: string, callback: (suggestions: Suggestion[]) => any) => {
-    if (search.length < 3) {
-      return
-    }
+  const loadOptions = React.useCallback(
+    () =>
+      debounce((search: string, callback: (suggestions: Suggestion[]) => any) => {
+        if (search.length < 3) {
+          return
+        }
 
-    getPlaces(search).then(data => {
-      if (!data) {
-        return
-      }
-      callback(data)
-    })
-  }, 750),
+        getPlaces(search).then(data => {
+          if (!data) {
+            return
+          }
+          callback(data)
+        })
+      }, 750),
     []
   )
 
